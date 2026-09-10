@@ -3,41 +3,80 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 100f;
-    public float jumpForce = 5f;
-
-    [Header("Ground Check")]
-    public float groundCheckDistance = 2f;
-    public LayerMask groundLayer;
-
+    [Header("Bewegung")]
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private Transform cameraTransform;
+    
+    [Header("Sprung")]
+    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float groundCheckDistance = 20f;
+    [SerializeField] private LayerMask groundLayer;
+    
+    
     private Rigidbody rb;
     private bool isGrounded;
-    
-    void Start()
+    private bool jumpRequested;
+
+    //Claude Movement Codebeispiel mit Rigidbody für Physik, Bewegung relativ zu Kameraposition, Sprungfunktion
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true; // verhindert Umkippen durch Kollisionen
+
+        // Falls keine Kamera zugewiesen wurde, automatisch die Hauptkamera verwenden
+        if (cameraTransform == null && Camera.main != null)
+        {
+            cameraTransform = Camera.main.transform;
+        }
     }
 
     void Update()
     {
-        float rotationInput = Input.GetAxis("Horizontal");
-        transform.Rotate(Vector3.up, rotationInput * rotationSpeed * Time.deltaTime);
-
-        // Ground-Check per Raycast nach unten
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
-
-        // Sprung
+        // Sprung-Eingabe in Update abfragen, damit kein Tastendruck verloren geht
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            jumpRequested = true;
         }
     }
+
     void FixedUpdate()
     {
-        float moveInput = Input.GetAxis("Vertical");
-        Vector3 move = transform.forward * moveInput * moveSpeed;
-        rb.MovePosition(rb.position + move * Time.fixedDeltaTime);
+        CheckGrounded();
+        Move();
+
+        if (jumpRequested)
+        {
+            Jump();
+            jumpRequested = false;
+        }
+    }
+
+    private void Move()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        // Kamera-Vorwärts- und Rechts-Vektor holen, Y-Komponente ignorieren
+        Vector3 camForward = cameraTransform.forward;
+        Vector3 camRight = cameraTransform.right;
+        camForward.y = 0f;
+        camRight.y = 0f;
+        camForward.Normalize();
+        camRight.Normalize();
+
+        // Bewegungsrichtung relativ zur Kamera berechnen
+        Vector3 movement = (camForward * vertical + camRight * horizontal);
+
+        Vector3 newPosition = rb.position + movement * speed * Time.fixedDeltaTime;
+        rb.MovePosition(newPosition);
+    }
+
+    private void Jump()
+    {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void CheckGrounded()
+    {
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.1f, groundLayer);
     }
 }
