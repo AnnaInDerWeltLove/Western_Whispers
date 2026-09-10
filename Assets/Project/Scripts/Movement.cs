@@ -31,6 +31,10 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetButtonDown("Jump"))
+        {
+            Debug.Log("Leertaste erkannt! Grounded: " + isGrounded);
+        }
         // Sprung-Eingabe in Update abfragen, damit kein Tastendruck verloren geht
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -66,8 +70,9 @@ public class Movement : MonoBehaviour
         // Bewegungsrichtung relativ zur Kamera berechnen
         Vector3 movement = (camForward * vertical + camRight * horizontal);
 
-        Vector3 newPosition = rb.position + movement * speed * Time.fixedDeltaTime;
-        rb.MovePosition(newPosition);
+        Vector3 velocity = movement * speed;
+
+        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
     }
 
     private void Jump()
@@ -77,6 +82,14 @@ public class Movement : MonoBehaviour
 
     private void CheckGrounded()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.1f, groundLayer);
+        Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, Color.red);
+        //isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.1f, groundLayer);
+       
+            Vector3 startPoint = transform.position + Vector3.up * 0.2f;
+
+            Debug.DrawRay(startPoint, Vector3.down * groundCheckDistance, Color.red);
+
+            isGrounded = Physics.Raycast(startPoint, Vector3.down, groundCheckDistance, groundLayer
+            );   
     }
 }
