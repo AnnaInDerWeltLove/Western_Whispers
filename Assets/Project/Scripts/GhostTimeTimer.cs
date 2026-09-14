@@ -5,7 +5,7 @@ public class GhostTimeTimer : MonoBehaviour
     [SerializeField] private float maxGhostTime = 60f;
     [SerializeField] private WorldManager worldManager;
     private float currentGhostTime;
-    private bool isInGhostWorld = false;
+    private bool isSpiritWorld = false;
     void Start()
     {
         currentGhostTime = maxGhostTime;
@@ -13,7 +13,7 @@ public class GhostTimeTimer : MonoBehaviour
 
     private void Update()
     {
-        if (isInGhostWorld)
+        if (isSpiritWorld)
         {
             currentGhostTime -= Time.deltaTime;
             Debug.Log("Geisterwelt: " + currentGhostTime);
@@ -22,7 +22,7 @@ public class GhostTimeTimer : MonoBehaviour
             {
                 worldManager.SetNormalWorld();
                 currentGhostTime = 0;
-                isInGhostWorld = false;
+                isSpiritWorld = false;
             }
         }
         else
@@ -41,11 +41,11 @@ public class GhostTimeTimer : MonoBehaviour
     public void StartGhostTime()
     {
         
-            isInGhostWorld = true;
+            isSpiritWorld = true;
         
     }
     public void StopGhostTime()
     {
-        isInGhostWorld = false;
+        isSpiritWorld = false;
     }
 }
