@@ -1,17 +1,18 @@
 using UnityEngine;
 
+/*
 public class CameraSwitch : MonoBehaviour
 {
-    [SerializeField] private Camera camera1;
-    [SerializeField] private Camera camera2;
+    [SerializeField] private Camera moveCamera;
+    [SerializeField] private Camera aimCamera;
 
-    [SerializeField] private KeyCode switchKey = KeyCode.C;
+    [SerializeField] private KeyCode switchKey = KeyCode.Mouse1;
 
     private void Start()
     {
         // Sicherstellen, dass zu Beginn nur Kamera 1 aktiv ist
-        camera1.gameObject.SetActive(true);
-        camera2.gameObject.SetActive(false);
+        moveCamera.gameObject.SetActive(true);
+        aimCamera.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -24,9 +25,10 @@ public class CameraSwitch : MonoBehaviour
 
     private void SwitchCamera()
     {
-        bool cam1Active = camera1.gameObject.activeSelf;
-        camera1.gameObject.SetActive(!cam1Active);
-        camera2.gameObject.SetActive(cam1Active);
+        bool cam1Active = moveCamera.gameObject.activeSelf;
+        moveCamera.gameObject.SetActive(!cam1Active);
+        aimCamera.gameObject.SetActive(cam1Active);
     }
     
 }
+*/

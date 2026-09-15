@@ -6,7 +6,9 @@ public class Targeting : MonoBehaviour
     [Header("Referenzen")]
     [SerializeField] private Transform playerBody;      // Wird zur Blickrichtung gedreht
     [SerializeField] private Transform cameraPivot;      // Punkt, um den die Kamera rotiert
+    [SerializeField] private Camera moveCamera;
     [SerializeField] private Camera aimCamera;
+    [SerializeField] private KeyCode switchKey = KeyCode.Mouse1;
 
     [Header("Maus-Einstellungen")]
     [SerializeField] private float mouseSensitivity = 2f;
@@ -39,6 +41,8 @@ public class Targeting : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        moveCamera.gameObject.SetActive(true);
+        aimCamera.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -55,6 +59,10 @@ public class Targeting : MonoBehaviour
         HandleAimInput();
         HandleMouseLook();
         HandleZoom();
+        if (Input.GetKeyDown(switchKey))
+        {
+            SwitchCamera();
+        }
     }
     private void HandleAimInput()
     {
@@ -90,7 +98,14 @@ public class Targeting : MonoBehaviour
             Time.deltaTime * fovTransitionSpeed
         );
     }
-
+    
+    private void SwitchCamera()
+    {
+        bool cam1Active = moveCamera.gameObject.activeSelf;
+        moveCamera.gameObject.SetActive(!cam1Active);
+        aimCamera.gameObject.SetActive(cam1Active);
+    }
+    
     /// <summary>
     /// Gibt den Punkt zurück, auf den gerade gezielt wird (Bildschirmmitte -> Raycast).
     /// Nützlich für Waffen, Fadenkreuz-Ausrichtung, Zielmarkierung etc.
