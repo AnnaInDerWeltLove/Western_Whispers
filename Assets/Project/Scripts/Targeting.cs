@@ -16,18 +16,18 @@ public class Targeting : MonoBehaviour
         
     }
 
-    /// <summary>
-    /// Gibt den Punkt zurück, auf den gerade gezielt wird (Bildschirmmitte -> Raycast).
-    /// Nützlich für Waffen, Fadenkreuz-Ausrichtung, Zielmarkierung etc.
-    /// </summary>
-    public bool TryGetAimPoint(out RaycastHit hit)
+    // <summary>
+    // gibt den Punkt zurück, auf den gerade gezielt wird (Bildschirmmitte -> Raycast).
+    // Nützlich für Waffen, Fadenkreuz-Ausrichtung, Zielmarkierung etc.
+    // </summary>
+    public Vector3 GetAimPoint()
     {
         Ray ray = aimCamera.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, out hit, maxAimDistance, aimLayerMask);
-    }
+        if (Physics.Raycast(ray, out RaycastHit hit, maxAimDistance, aimLayerMask))
+        {
+            return hit.point;
+        }
 
-   /* public Vector3 GetAimDirection()
-    {
-        return aimCamera.transform.forward;
-    }*/
+        return ray.GetPoint(maxAimDistance);
+    }
 }
