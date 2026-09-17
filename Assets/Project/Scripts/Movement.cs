@@ -8,8 +8,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     
     [Header("Sprung")]
-    [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float groundCheckDistance = 20f;
+    [SerializeField] private float jumpForce = 3f;
+    [SerializeField] private float groundCheckDistance = 0.6f;
     [SerializeField] private LayerMask groundLayer;
     
     
