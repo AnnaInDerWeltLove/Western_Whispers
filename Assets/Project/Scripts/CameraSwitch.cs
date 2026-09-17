@@ -1,6 +1,5 @@
 using UnityEngine;
 
-/*
 public class CameraSwitch : MonoBehaviour
 {
     [SerializeField] private Camera moveCamera;
@@ -31,4 +30,3 @@ public class CameraSwitch : MonoBehaviour
     }
     
 }
-*/

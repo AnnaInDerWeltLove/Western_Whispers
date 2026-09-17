@@ -6,9 +6,7 @@ public class Targeting : MonoBehaviour
     [Header("Referenzen")]
     [SerializeField] private Transform playerBody;      // Wird zur Blickrichtung gedreht
     [SerializeField] private Transform cameraPivot;      // Punkt, um den die Kamera rotiert
-    [SerializeField] private Camera moveCamera;
-    [SerializeField] private Camera aimCamera;
-    [SerializeField] private KeyCode switchKey = KeyCode.Mouse1;
+    [SerializeField] private Camera mainCamera;
 
     [Header("Maus-Einstellungen")]
     [SerializeField] private float mouseSensitivity = 2f;
@@ -41,16 +39,14 @@ public class Targeting : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        moveCamera.gameObject.SetActive(true);
-        aimCamera.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        if (aimCamera == null)
-            aimCamera = GetComponent<Camera>();
+        if (mainCamera == null)
+            mainCamera = GetComponent<Camera>();
 
         yaw = playerBody != null ? playerBody.eulerAngles.y : 0f;
-        aimCamera.fieldOfView = normalFOV;
+        mainCamera.fieldOfView = normalFOV;
     }
 
     // Update is called once per frame
@@ -59,10 +55,6 @@ public class Targeting : MonoBehaviour
         HandleAimInput();
         HandleMouseLook();
         HandleZoom();
-        if (Input.GetKeyDown(switchKey))
-        {
-            SwitchCamera();
-        }
     }
     private void HandleAimInput()
     {
@@ -92,18 +84,11 @@ public class Targeting : MonoBehaviour
     private void HandleZoom()
     {
         float targetFOV = isAiming ? aimFOV : normalFOV;
-        aimCamera.fieldOfView = Mathf.Lerp(
-            aimCamera.fieldOfView,
+        mainCamera.fieldOfView = Mathf.Lerp(
+            mainCamera.fieldOfView,
             targetFOV,
             Time.deltaTime * fovTransitionSpeed
         );
-    }
-    
-    private void SwitchCamera()
-    {
-        bool cam1Active = moveCamera.gameObject.activeSelf;
-        moveCamera.gameObject.SetActive(!cam1Active);
-        aimCamera.gameObject.SetActive(cam1Active);
     }
     
     /// <summary>
@@ -112,12 +97,12 @@ public class Targeting : MonoBehaviour
     /// </summary>
     public bool TryGetAimPoint(out RaycastHit hit)
     {
-        Ray ray = aimCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         return Physics.Raycast(ray, out hit, maxAimDistance, aimLayerMask);
     }
 
     public Vector3 GetAimDirection()
     {
-        return aimCamera.transform.forward;
+        return mainCamera.transform.forward;
     }
 }
