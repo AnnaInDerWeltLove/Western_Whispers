@@ -2234,7 +2234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155f564da2111a40b500f6d3281185e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting
-  playerBody: {fileID: 0}
+  playerBody: {fileID: 254637352}
   cameraPivot: {fileID: 0}
   mainCamera: {fileID: 555621873}
   mouseSensitivity: 2
@@ -2874,7 +2874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d155f564da2111a40b500f6d3281185e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting
-  playerBody: {fileID: 0}
+  playerBody: {fileID: 254637352}
   cameraPivot: {fileID: 0}
   mainCamera: {fileID: 646082342}
   mouseSensitivity: 2
