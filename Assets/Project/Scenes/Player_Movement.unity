@@ -2295,7 +2295,7 @@ MonoBehaviour:
   mainCamera: {fileID: 555621873}
   mouseSensitivity: 2
   invertY: 0
-  aimKey: 324
+  aimKey: 99
   aimMoveSpeedMultiplier: 0.5
   normalFOV: 60
   aimFOV: 35
@@ -2935,7 +2935,7 @@ MonoBehaviour:
   mainCamera: {fileID: 646082342}
   mouseSensitivity: 2
   invertY: 0
-  aimKey: 324
+  aimKey: 99
   aimMoveSpeedMultiplier: 0.5
   normalFOV: 60
   aimFOV: 35
@@ -3537,7 +3537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraSwitch
   moveCamera: {fileID: 646082342}
   aimCamera: {fileID: 555621873}
-  switchKey: 324
+  switchKey: 99
 --- !u!1001 &932716102
 PrefabInstance:
   m_ObjectHideFlags: 0

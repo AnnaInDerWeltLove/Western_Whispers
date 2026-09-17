@@ -5,7 +5,7 @@ public class CameraSwitch : MonoBehaviour
     [SerializeField] private Camera moveCamera;
     [SerializeField] private Camera aimCamera;
 
-    [SerializeField] private KeyCode switchKey = KeyCode.Mouse1;
+    [SerializeField] private KeyCode switchKey = KeyCode.C;
 
     private void Start()
     {

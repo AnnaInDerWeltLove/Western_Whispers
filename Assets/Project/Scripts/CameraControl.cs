@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
-public class Targeting : MonoBehaviour
+public class CameraControl : MonoBehaviour
 {
     [Header("Referenzen")]
     [SerializeField] private Transform playerBody;      // Wird zur Blickrichtung gedreht
@@ -13,7 +13,7 @@ public class Targeting : MonoBehaviour
     [SerializeField] private bool invertY = false;
 
     [Header("Zielmodus")]
-    [SerializeField] private KeyCode aimKey = KeyCode.Mouse1; // Rechte Maustaste
+    [SerializeField] private KeyCode aimKey = KeyCode.C; // Rechte Maustaste
     [SerializeField] private float aimMoveSpeedMultiplier = 0.5f; // Für Bewegung während des Zielens
 
     [Header("Zoom")]
@@ -55,10 +55,31 @@ public class Targeting : MonoBehaviour
         HandleAimInput();
         HandleMouseLook();
         HandleZoom();
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            MenuUnlock();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            MouseLock();
+        }
     }
     private void HandleAimInput()
     {
         isAiming = Input.GetKeyDown(aimKey);
+    }
+
+    private void MouseLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void MenuUnlock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void HandleMouseLook()
