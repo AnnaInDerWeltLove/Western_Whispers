@@ -36,7 +36,7 @@ public class PuzzleManager : MonoBehaviour
         {
             hintObject1.SetActive(false);
         }
-        puzzleObject1.SetActive(puzzle1Unlocked);
+        puzzleObject1.SetActive(puzzle1Unlocked && !isSpiritWorld);
     }
     
     private void OnEnable()

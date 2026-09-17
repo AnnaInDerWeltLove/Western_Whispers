@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FightManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class FightManager : MonoBehaviour
    [SerializeField] private LightRevolver lightRevolver;
    [SerializeField] private GameObject victoryPopup;
    [SerializeField] private float maxFightTime = 40f;
+   [SerializeField] private GameObject losePanel;
    
    private float currentFightTime;
    private bool fightTimerRunning = false;
@@ -17,6 +19,7 @@ public class FightManager : MonoBehaviour
       attackPopup.SetActive(false);
       crosshair.SetActive(false);
       victoryPopup.SetActive(false);
+      losePanel.SetActive(false);
    }
    private void Update()
    {
@@ -73,6 +76,16 @@ public class FightManager : MonoBehaviour
    private void LoseFight()
    {
       Debug.Log("Verloren!");
+      losePanel.SetActive(true);
+      lightRevolver.DisableShooting();
+      crosshair.SetActive(false);
+      Cursor.lockState = CursorLockMode.None;
+      Cursor.visible = true;
+      Invoke(nameof(RestartGame), 3f);
+   }
+   private void RestartGame()
+   {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
    }
    
 }
