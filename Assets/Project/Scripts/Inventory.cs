@@ -1,23 +1,44 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryPanel;
-    [SerializeField] private GameObject itemImage;
-
-    private bool hasItem = false;
-
-    private void start()
+    [SerializeField] private Image[] slots;
+    
+    private int nextFreeSlot = 0;
+    
+    private void Start()
     {
         inventoryPanel.SetActive(false);
-        itemImage.SetActive(false);
+        foreach (Image slot in slots)
+        {
+            slot.gameObject.SetActive(false);
+        }
     }
 
-    public void AddItem()
+    public void AddItem(Sprite itemSprite)
     {
-        hasItem = true;
-        itemImage.SetActive(true);
-        Debug.Log("Item ins Inventar aufgenommen");
+        Debug.Log("AddItem wurde aufgerufen.");
+        Debug.Log("Item Sprite: " + itemSprite);
+        Debug.Log("Nächster Slot: " + nextFreeSlot);
+        Debug.Log("Anzahl Slots: " + slots.Length);
+        
+        
+        if (nextFreeSlot >= slots.Length)
+        {
+            Debug.Log("Kein freier Slot im Inventar");
+            return;
+        }
+        
+        Debug.Log("Verwendeter Slot: " + slots[nextFreeSlot]);
+
+        slots[nextFreeSlot].sprite = itemSprite;
+        slots[nextFreeSlot].gameObject.SetActive(true);
+        
+        Debug.Log("Slot aktiv: " + slots[nextFreeSlot].gameObject.activeSelf);
+        nextFreeSlot++;
+      
     }
 
     public void OpenInventory()

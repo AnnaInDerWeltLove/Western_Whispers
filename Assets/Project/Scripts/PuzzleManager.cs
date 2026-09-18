@@ -72,6 +72,11 @@ public class PuzzleManager : MonoBehaviour
             hint2Unlocked = true;
             Debug.Log("Hinweis 2 freigeschaltet");
         }
+        if (puzzleID == 2)
+        {
+            hint3Unlocked = true;
+            Debug.Log("Hinweis 3 freigeschaltet");
+        }
     }
     
     private void OnEnable()

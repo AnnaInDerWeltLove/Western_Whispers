@@ -1,31 +1,42 @@
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.UI;
 
 public class MechanismInteraction : MonoBehaviour
-{
+{   [Header("Cutscenes")]
     [SerializeField] private VideoPlayer cutScenePlayer;
     [SerializeField] private GameObject cutScenePanel;
-    [SerializeField] private Movement movement;
-    [SerializeField] private GameObject itemRewardPanel;
-    [SerializeField] private GameObject inventoryPanel;
-    [SerializeField] private GameObject inventoryItemImage;
-    [SerializeField] private Inventory Inventory;
-    [SerializeField] private PuzzleManager puzzleManager;
+    [SerializeField] private VideoPlayer storyCutScenePlayer;
+    
+    [Header("Reward Part")]
+    [SerializeField] private GameObject rewardItemPanel; 
+    [SerializeField] private UnityEngine.UI.Image rewardItemImage;
+    [SerializeField] private Sprite rewardItemSprite;
+    
+    [Header("Inventory")]
+    [SerializeField] private Inventory inventory;
+    
+    [Header("Puzzle")]
+    [SerializeField] private PuzzleManager puzzleManager; 
     [SerializeField] private int puzzleID = 1;
+    [SerializeField] private Movement movement;
+    
+    
+   
     private bool playerInside;
     private bool mechanismActivated = false;
     private bool sequenceRunning = false;
 
-    void Start()
+    private void Start()
     {
         cutScenePanel.SetActive(false);
-        cutScenePlayer.loopPointReached += OnCutsceneFinished;
-        itemRewardPanel.SetActive(false);
-        inventoryPanel.SetActive(false);
-        inventoryItemImage.SetActive(false);
+        cutScenePlayer.loopPointReached += OnStoryCutsceneFinished;
+        storyCutScenePlayer.loopPointReached += OnHintCutsceneFinished;
+        rewardItemPanel.SetActive(false);
+       
     }
 
-    void Update()
+    private void Update()
     {
         if (playerInside && !mechanismActivated && !sequenceRunning && Input.GetKeyDown(KeyCode.E))
         {
@@ -63,30 +74,45 @@ public class MechanismInteraction : MonoBehaviour
         
     }
 
-    private void OnCutsceneFinished(VideoPlayer vp)
+    private void OnStoryCutsceneFinished(VideoPlayer vp)
     {
+        if (!sequenceRunning)
+        {
+            return;
+        }
         Debug.Log("Cutscene abgeschlossen!");
         cutScenePanel.SetActive(false);
-        itemRewardPanel.SetActive(true);
+        rewardItemImage.sprite = rewardItemSprite;
+        rewardItemPanel.SetActive(true);
         Invoke(nameof(ShowItemInInventory), 2f);
     }
     private void ShowItemInInventory()
     {
-        inventoryPanel.SetActive(true);
-        inventoryItemImage.SetActive(true);
+        inventory.AddItem(rewardItemSprite);
+        inventory.OpenInventory();
+        rewardItemPanel.SetActive(false);
         Debug.Log("Item in Inventar geschoben!");
-        movement.enabled = true;
-        sequenceRunning = false;
-        Invoke(nameof(FinishMechanismSequence), 2f);
+        Invoke(nameof(StartHintCutscene), 2f);
     }
-    private void FinishMechanismSequence()
+    private void StartHintCutscene()
     {
-        inventoryPanel.SetActive(false);
+        inventory.CloseInventory();
+        cutScenePanel.SetActive(true);
+        storyCutScenePlayer.Play();
+        Debug.Log("Mechanismus beendet!");
+    }
+
+    private void OnHintCutsceneFinished(VideoPlayer vp)
+    {
+        if (!sequenceRunning)
+        {
+            return;
+        }
+        cutScenePanel.SetActive(false);
         movement.enabled = true;
         sequenceRunning = false;
-        itemRewardPanel.SetActive(false);
-        puzzleManager.CompletedPuzzle(puzzleID); 
-        Debug.Log("Mechanismus beendet!");
+        puzzleManager.CompletedPuzzle(puzzleID);
+        Debug.Log("Story Cutscene abgeschlossen!");
     }
 }
 
