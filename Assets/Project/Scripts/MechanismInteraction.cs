@@ -9,7 +9,9 @@ public class MechanismInteraction : MonoBehaviour
     [SerializeField] private GameObject itemRewardPanel;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject inventoryItemImage;
-    [SerializeField] private Inventar inventar;
+    [SerializeField] private Inventory Inventory;
+    [SerializeField] private PuzzleManager puzzleManager;
+    [SerializeField] private int puzzleID = 1;
     private bool playerInside;
     private bool mechanismActivated = false;
     private bool sequenceRunning = false;
@@ -66,7 +68,7 @@ public class MechanismInteraction : MonoBehaviour
         Debug.Log("Cutscene abgeschlossen!");
         cutScenePanel.SetActive(false);
         itemRewardPanel.SetActive(true);
-        Invoke(nameof(ShowItemInInventory), 5f);
+        Invoke(nameof(ShowItemInInventory), 2f);
     }
     private void ShowItemInInventory()
     {
@@ -75,7 +77,7 @@ public class MechanismInteraction : MonoBehaviour
         Debug.Log("Item in Inventar geschoben!");
         movement.enabled = true;
         sequenceRunning = false;
-        Invoke(nameof(FinishMechanismSequence), 3f);
+        Invoke(nameof(FinishMechanismSequence), 2f);
     }
     private void FinishMechanismSequence()
     {
@@ -83,6 +85,7 @@ public class MechanismInteraction : MonoBehaviour
         movement.enabled = true;
         sequenceRunning = false;
         itemRewardPanel.SetActive(false);
+        puzzleManager.CompletedPuzzle(puzzleID); 
         Debug.Log("Mechanismus beendet!");
     }
 }

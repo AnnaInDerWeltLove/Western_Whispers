@@ -11,7 +11,12 @@ public class FightManager : MonoBehaviour
    [SerializeField] private GameObject victoryPopup;
    [SerializeField] private float maxFightTime = 40f;
    [SerializeField] private GameObject losePanel;
-   
+   [SerializeField] private GameObject ghost1;
+   [SerializeField] private GameObject ghost2;
+   [SerializeField] private GameObject ghost3;
+
+
+   private int currentClueID;
    private float currentFightTime;
    private bool fightTimerRunning = false;
    private void Start()
@@ -20,6 +25,9 @@ public class FightManager : MonoBehaviour
       crosshair.SetActive(false);
       victoryPopup.SetActive(false);
       losePanel.SetActive(false);
+      ghost1.SetActive(false);
+      ghost2.SetActive(false);
+      ghost3.SetActive(false);
    }
    private void Update()
    {
@@ -37,9 +45,12 @@ public class FightManager : MonoBehaviour
    }
    public void StartFight(int clueID)
    {
-      Debug.Log("Fight gestartet!");
+      currentClueID = clueID;
+      Debug.Log("Fight gestartet! Clue ID: " + clueID);
       ghostTimeTimer.FreezeGhostTime();
       attackPopup.SetActive(true);
+      Cursor.lockState = CursorLockMode.None;
+      Cursor.visible = true;
    }
 
    public void StartAttack()
@@ -50,9 +61,27 @@ public class FightManager : MonoBehaviour
       lightRevolver.EnableShooting();
       currentFightTime = maxFightTime;
       fightTimerRunning = true;
-      
       Cursor.lockState = CursorLockMode.None;
       Cursor.visible = false;
+      if (currentClueID == 1)
+      {
+         ghost1.SetActive(true);
+         ghost2.SetActive(false);
+         ghost3.SetActive(false);
+      }
+      if (currentClueID == 2)
+      {
+         ghost2.SetActive(true);
+         ghost1.SetActive(false);
+         ghost3.SetActive(false);
+      }
+      if (currentClueID == 3)
+      {
+         ghost3.SetActive(true);
+         ghost1.SetActive(false);
+         ghost2.SetActive(false);
+      }
+      
    }
 
    public void WinFight()

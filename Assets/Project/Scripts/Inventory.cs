@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Inventar : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject itemImage;
