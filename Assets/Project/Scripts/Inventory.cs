@@ -19,24 +19,14 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Sprite itemSprite)
     {
-        Debug.Log("AddItem wurde aufgerufen.");
-        Debug.Log("Item Sprite: " + itemSprite);
-        Debug.Log("Nächster Slot: " + nextFreeSlot);
-        Debug.Log("Anzahl Slots: " + slots.Length);
-        
-        
         if (nextFreeSlot >= slots.Length)
         {
             Debug.Log("Kein freier Slot im Inventar");
             return;
         }
-        
-        Debug.Log("Verwendeter Slot: " + slots[nextFreeSlot]);
 
         slots[nextFreeSlot].sprite = itemSprite;
         slots[nextFreeSlot].gameObject.SetActive(true);
-        
-        Debug.Log("Slot aktiv: " + slots[nextFreeSlot].gameObject.activeSelf);
         nextFreeSlot++;
       
     }

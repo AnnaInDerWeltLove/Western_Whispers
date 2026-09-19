@@ -1,17 +1,19 @@
-
-using System;
 using UnityEngine;
-using Random = System.Random;
 
 public class GhostEnemy : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private Collider ghostCollider;
+    [SerializeField] private PuzzleManager puzzleManager;
+    [SerializeField] private FightManager fightManager;
+    
+    [Header("Movement")]
     [SerializeField] private float speed = 10f;
     [SerializeField] private float maxXDistance = 4f;
     [SerializeField] private float maxYDistance = 4f;
-    [SerializeField] private PuzzleManager puzzleManager;
+    
+    [Header("Ghost Settings")]
     [SerializeField] private int clueID = 1;
-    [SerializeField] private FightManager fightManager;
     
     private Vector3 centerPosition;
     private Vector3 targetPosition;

@@ -11,7 +11,6 @@ public class DetectionTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && !encounterStarted)
         {
-            Debug.Log("Player hat den Trigger betreten.");
             encounterStarted = true;
             puzzleManager.StartGhostEncounter(clueID);
         }

@@ -3,22 +3,29 @@ using UnityEngine.SceneManagement;
 
 public class FightManager : MonoBehaviour
 {
+   [Header("UI")]
    [SerializeField] private GameObject attackPopup;
+   [SerializeField] private GameObject crosshair;
+   [SerializeField] private GameObject victoryPopup;
+   [SerializeField] private GameObject losePanel;
+   
+   [Header("References")]
    [SerializeField] private GhostTimeTimer ghostTimeTimer;
    [SerializeField] private CameraManager cameraManager;
-   [SerializeField] private GameObject crosshair;
    [SerializeField] private LightRevolver lightRevolver;
-   [SerializeField] private GameObject victoryPopup;
+   
+   [Header("Fight Settings")]
    [SerializeField] private float maxFightTime = 40f;
-   [SerializeField] private GameObject losePanel;
+   
+   [Header("Ghosts")]
    [SerializeField] private GameObject ghost1;
    [SerializeField] private GameObject ghost2;
    [SerializeField] private GameObject ghost3;
-
-
+   
    private int currentClueID;
    private float currentFightTime;
-   private bool fightTimerRunning = false;
+   private bool fightTimerRunning;
+   
    private void Start()
    {
       attackPopup.SetActive(false);
@@ -34,7 +41,6 @@ public class FightManager : MonoBehaviour
       if (fightTimerRunning)
       {
          currentFightTime -= Time.deltaTime;
-         Debug.Log("Kampfzeit: " + currentFightTime);
          if (currentFightTime <= 0)
          {
             currentFightTime = 0;
@@ -46,7 +52,6 @@ public class FightManager : MonoBehaviour
    public void StartFight(int clueID)
    {
       currentClueID = clueID;
-      Debug.Log("Fight gestartet! Clue ID: " + clueID);
       ghostTimeTimer.FreezeGhostTime();
       attackPopup.SetActive(true);
       Cursor.lockState = CursorLockMode.None;
@@ -63,23 +68,22 @@ public class FightManager : MonoBehaviour
       fightTimerRunning = true;
       Cursor.lockState = CursorLockMode.None;
       Cursor.visible = false;
-      if (currentClueID == 1)
+      ghost1.SetActive(false);
+      ghost2.SetActive(false);
+      ghost3.SetActive(false);
+     switch (currentClueID)
       {
-         ghost1.SetActive(true);
-         ghost2.SetActive(false);
-         ghost3.SetActive(false);
-      }
-      if (currentClueID == 2)
-      {
-         ghost2.SetActive(true);
-         ghost1.SetActive(false);
-         ghost3.SetActive(false);
-      }
-      if (currentClueID == 3)
-      {
-         ghost3.SetActive(true);
-         ghost1.SetActive(false);
-         ghost2.SetActive(false);
+         case 1:
+            ghost1.SetActive(true);
+            break;
+      
+         case 2:
+            ghost2.SetActive(true);
+            break;
+      
+         case 3:
+            ghost3.SetActive(true);
+            break;
       }
       
    }
@@ -104,7 +108,6 @@ public class FightManager : MonoBehaviour
    }
    private void LoseFight()
    {
-      Debug.Log("Verloren!");
       losePanel.SetActive(true);
       lightRevolver.DisableShooting();
       crosshair.SetActive(false);

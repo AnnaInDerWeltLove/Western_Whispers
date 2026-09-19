@@ -1,18 +1,25 @@
-using System;
 using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
+    [Header("Puzzle Objects")]
     [SerializeField] private GameObject puzzleObject1;
     [SerializeField] private GameObject puzzleObject2;
     [SerializeField] private GameObject puzzleObject3;
+    
+    [Header("Hint Objects")]
     [SerializeField] private GameObject hintObject1;
     [SerializeField] private GameObject hintObject2;
     [SerializeField] private GameObject hintObject3;
-    [SerializeField] SphereCollider hint1RigidBody;
-    [SerializeField] SphereCollider hint2RigidBody;
-    [SerializeField] SphereCollider hint3RigidBody;
+    
+    [Header("Detection Triggers")]
+    [SerializeField] private SphereCollider hint1DetectionTrigger;
+    [SerializeField] private SphereCollider hint2DetectionTrigger;
+    [SerializeField] private SphereCollider hint3DetectionTrigger;
+    
+    [Header("Fight Manager")]
     [SerializeField] private FightManager fightManager;
+    
     private bool hint1Unlocked;
     private bool hint2Unlocked;
     private bool hint3Unlocked;
@@ -23,6 +30,7 @@ public class PuzzleManager : MonoBehaviour
     private bool puzzle1Unlocked = false;
     private bool puzzle2Unlocked = false;
     private bool puzzle3Unlocked = false;
+    
     private void Start()
     {
         hint1Unlocked = true;
@@ -33,52 +41,6 @@ public class PuzzleManager : MonoBehaviour
     {
             Hint();
     }
-
-    private void Hint()
-    {
-        if (isSpiritWorld && hint1Unlocked)
-        {
-            hintObject1.SetActive(true);
-        }
-        else
-        {
-            hintObject1.SetActive(false);
-        }
-        if (isSpiritWorld && hint2Unlocked)
-        {
-            hintObject2.SetActive(true);
-        }
-        else
-        {
-            hintObject2.SetActive(false);
-        }
-        if (isSpiritWorld && hint3Unlocked)
-        {
-            hintObject3.SetActive(true);
-        }
-        else
-        {
-            hintObject3.SetActive(false);
-        }
-        puzzleObject1.SetActive(puzzle1Unlocked && !isSpiritWorld);
-        puzzleObject2.SetActive(puzzle2Unlocked && !isSpiritWorld);
-        puzzleObject3.SetActive(puzzle3Unlocked && !isSpiritWorld);
-    }
-
-    public void CompletedPuzzle(int puzzleID)
-    {
-        if (puzzleID == 1)
-        {
-            hint2Unlocked = true;
-            Debug.Log("Hinweis 2 freigeschaltet");
-        }
-        if (puzzleID == 2)
-        {
-            hint3Unlocked = true;
-            Debug.Log("Hinweis 3 freigeschaltet");
-        }
-    }
-    
     private void OnEnable()
     {
         WorldManager.OnWorldChanged += HandleWorldChanged;
@@ -88,51 +50,69 @@ public class PuzzleManager : MonoBehaviour
     {
         WorldManager.OnWorldChanged -= HandleWorldChanged;
     }
-
     private void HandleWorldChanged(bool spiritWorld)
     {
         isSpiritWorld = spiritWorld;
-        Debug.Log("PuzzleManager bekommt Weltwechsel: " + spiritWorld);
-        Debug.Log("SpiritClue aktiv: " + hintObject1.activeSelf);
     }
-
+    private void Hint()
+    {
+        hintObject1.SetActive(isSpiritWorld && hint1Unlocked);
+        hintObject2.SetActive(isSpiritWorld && hint2Unlocked);
+        hintObject3.SetActive(isSpiritWorld && hint3Unlocked);
+       
+        puzzleObject1.SetActive(puzzle1Unlocked && !isSpiritWorld);
+        puzzleObject2.SetActive(puzzle2Unlocked && !isSpiritWorld);
+        puzzleObject3.SetActive(puzzle3Unlocked && !isSpiritWorld);
+    }
     public void StartGhostEncounter(int clueID)
     {
-        if (clueID == 1)
+        switch (clueID)
         {
-            hint1IsFound = true;
-            fightManager.StartFight(1);
-
-        }
-        if (clueID == 2)
-        {
-            hint2IsFound = true;
-            fightManager.StartFight(2);
-
-        }
-        if (clueID == 3)
-        {
-            hint3IsFound = true;
-            fightManager.StartFight(3);
-
+            case 1:
+                hint1IsFound = true;
+                fightManager.StartFight(1);
+                break;
+            
+            case 2: 
+                hint2IsFound = true;
+                fightManager.StartFight(2);
+                break;
+            
+            case 3:
+                hint3IsFound = true;
+                fightManager.StartFight(3);
+                break;
         }
     }
-
     public void VictoriousGhostEncounter(int clueID)
     {
-        if (clueID == 1)
+        switch (clueID)
         {
-            puzzle1Unlocked = true;
-        }
-        if (clueID == 2)
-        {
-            puzzle2Unlocked = true;
-        }
-        if (clueID == 3)
-        {
-            puzzle3Unlocked = true;
+            case 1:
+                puzzle1Unlocked = true;
+                break;
+                 
+            case 2:
+                puzzle2Unlocked = true;
+                break;
+                
+            case 3:
+                puzzle3Unlocked = true;
+                break;
         }
     }
-    
+    public void CompletedPuzzle(int puzzleID)
+    {
+        switch (puzzleID)
+        {
+            case 1:
+                hint2Unlocked = true;
+                break;
+
+            case 2:
+                hint3Unlocked = true;
+                break;
+        }
+    }
 }
 

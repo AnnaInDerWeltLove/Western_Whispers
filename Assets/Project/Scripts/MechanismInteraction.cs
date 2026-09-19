@@ -3,10 +3,15 @@ using UnityEngine.Video;
 using UnityEngine.UI;
 
 public class MechanismInteraction : MonoBehaviour
-{   [Header("Cutscenes")]
-    [SerializeField] private VideoPlayer cutScenePlayer;
-    [SerializeField] private GameObject cutScenePanel;
+{   
+    [Header("Cutscenes")]
+    [SerializeField] private VideoPlayer hintCutScenePlayer;
+    [SerializeField] private GameObject hintCutScenePanel;
+    [SerializeField] private VideoClip hintVideo;
     [SerializeField] private VideoPlayer storyCutScenePlayer;
+    [SerializeField] private GameObject storyCutScenePanel;
+    [SerializeField] private VideoClip storyVideo;
+    
     
     [Header("Reward Part")]
     [SerializeField] private GameObject rewardItemPanel; 
@@ -22,16 +27,16 @@ public class MechanismInteraction : MonoBehaviour
     [SerializeField] private Movement movement;
     
     
-   
     private bool playerInside;
     private bool mechanismActivated = false;
     private bool sequenceRunning = false;
 
     private void Start()
     {
-        cutScenePanel.SetActive(false);
-        cutScenePlayer.loopPointReached += OnStoryCutsceneFinished;
-        storyCutScenePlayer.loopPointReached += OnHintCutsceneFinished;
+        hintCutScenePanel.SetActive(false);
+        storyCutScenePanel.SetActive(false);
+        hintCutScenePlayer.loopPointReached += OnHintCutsceneFinished;
+        storyCutScenePlayer.loopPointReached += OnStoryCutsceneFinished;
         rewardItemPanel.SetActive(false);
        
     }
@@ -44,34 +49,41 @@ public class MechanismInteraction : MonoBehaviour
 
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Player hat das Mechanismus betreten");
-            playerInside = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Player hat das Mechanismus verlassen");
-            playerInside = false;
-        }
-    }
-
     private void StartMechanismSequence()
     {
         movement.enabled = false;
         mechanismActivated = true;
         sequenceRunning = true;
-        Debug.Log("Mechanismus ausgelöst!");
-        cutScenePanel.SetActive(true);
-        cutScenePlayer.Play(); 
+        hintCutScenePanel.SetActive(true);
+        hintCutScenePlayer.clip = hintVideo;
+        hintCutScenePlayer.Play(); 
         
+    }
+    private void OnHintCutsceneFinished(VideoPlayer vp)
+    {
+        if (!sequenceRunning)
+        {
+            return;
+        }
+        hintCutScenePanel.SetActive(false);
+        rewardItemImage.sprite = rewardItemSprite;
+        rewardItemPanel.SetActive(true);
+        Invoke(nameof(ShowItemInInventory), 2f);
+      
+    }
+    private void ShowItemInInventory()
+    {
+        inventory.AddItem(rewardItemSprite);
+        inventory.OpenInventory();
+        rewardItemPanel.SetActive(false);
+        Invoke(nameof(StartStoryCutscene), 2f);
+    }
+    private void StartStoryCutscene()
+    {
+        inventory.CloseInventory();
+        storyCutScenePanel.SetActive(true);
+        storyCutScenePlayer.clip = storyVideo;
+        storyCutScenePlayer.Play();
     }
 
     private void OnStoryCutsceneFinished(VideoPlayer vp)
@@ -80,39 +92,25 @@ public class MechanismInteraction : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Cutscene abgeschlossen!");
-        cutScenePanel.SetActive(false);
-        rewardItemImage.sprite = rewardItemSprite;
-        rewardItemPanel.SetActive(true);
-        Invoke(nameof(ShowItemInInventory), 2f);
-    }
-    private void ShowItemInInventory()
-    {
-        inventory.AddItem(rewardItemSprite);
-        inventory.OpenInventory();
-        rewardItemPanel.SetActive(false);
-        Debug.Log("Item in Inventar geschoben!");
-        Invoke(nameof(StartHintCutscene), 2f);
-    }
-    private void StartHintCutscene()
-    {
-        inventory.CloseInventory();
-        cutScenePanel.SetActive(true);
-        storyCutScenePlayer.Play();
-        Debug.Log("Mechanismus beendet!");
-    }
-
-    private void OnHintCutsceneFinished(VideoPlayer vp)
-    {
-        if (!sequenceRunning)
-        {
-            return;
-        }
-        cutScenePanel.SetActive(false);
+        storyCutScenePanel.SetActive(false);
         movement.enabled = true;
         sequenceRunning = false;
         puzzleManager.CompletedPuzzle(puzzleID);
-        Debug.Log("Story Cutscene abgeschlossen!");
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInside = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInside = false;
+        }
     }
 }
 

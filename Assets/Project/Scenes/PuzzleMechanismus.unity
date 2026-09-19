@@ -154,9 +154,9 @@ MonoBehaviour:
   hintObject1: {fileID: 1917371904}
   hintObject2: {fileID: 2079043187}
   hintObject3: {fileID: 1527714604}
-  hint1RigidBody: {fileID: 400247782}
-  hint2RigidBody: {fileID: 1629874692}
-  hint3RigidBody: {fileID: 362289602}
+  hint1DetectionTrigger: {fileID: 400247782}
+  hint2DetectionTrigger: {fileID: 1629874692}
+  hint3DetectionTrigger: {fileID: 362289602}
   fightManager: {fileID: 946315200}
 --- !u!4 &5604972
 Transform:
@@ -912,6 +912,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce9bc360f36fb874e826fdd7f6f2c6e9, type: 3}
+--- !u!1 &177417447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 177417449}
+  - component: {fileID: 177417448}
+  m_Layer: 0
+  m_Name: StoryCutScenePlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!328 &177417448
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177417447}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: a1f9af54d6cb33241aced91fb4f3d8b4, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 8c88589dd88ef0a44a27eea8bda984ae, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 3
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!4 &177417449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177417447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.39193, y: 0.59245, z: -3.71969}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &177976774 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ce9bc360f36fb874e826fdd7f6f2c6e9, type: 3}
@@ -946,9 +1014,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 455147851}
     - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
+      propertyPath: hintVideo
+      value: 
+      objectReference: {fileID: 32900000, guid: 36e4ab73cc9122c4f892314ed8cc98cf, type: 3}
+    - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 455147851}
+    - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
+      propertyPath: storyVideo
+      value: 
+      objectReference: {fileID: 32900000, guid: 40f46099203a4234e8b923875808a2b1, type: 3}
     - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
       propertyPath: cutScenePanel
       value: 
@@ -982,9 +1058,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2863cf8e967838243aadaec26cfaa536, type: 3}
     - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
+      propertyPath: hintCutScenePanel
+      value: 
+      objectReference: {fileID: 1311382819}
+    - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
+      propertyPath: hintCutScenePlayer
+      value: 
+      objectReference: {fileID: 1803511202}
+    - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
       propertyPath: inventoryItemImage
       value: 
       objectReference: {fileID: 2062213348}
+    - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
+      propertyPath: storyCutScenePanel
+      value: 
+      objectReference: {fileID: 474291923}
+    - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
+      propertyPath: storyCutScenePlayer
+      value: 
+      objectReference: {fileID: 177417448}
     - target: {fileID: 3891968674068923676, guid: 8b46c985564f4854f929cb374d741400, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.898
@@ -2575,6 +2667,78 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d8255be64210fd43919d2e85f5b3d17, type: 3}
+--- !u!1 &474291923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 474291924}
+  - component: {fileID: 474291926}
+  - component: {fileID: 474291925}
+  m_Layer: 5
+  m_Name: StoryCutscenePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &474291924
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474291923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1541964580}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000061035, y: 0.0050049}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &474291925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474291923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 8c88589dd88ef0a44a27eea8bda984ae, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &474291926
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474291923}
+  m_CullTransparentMesh: 1
 --- !u!1001 &478315782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4502,9 +4666,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 455147851}
     - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
+      propertyPath: hintVideo
+      value: 
+      objectReference: {fileID: 32900000, guid: 97fae1c22af3e72459ca44650d26271c, type: 3}
+    - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 455147851}
+    - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
+      propertyPath: storyVideo
+      value: 
+      objectReference: {fileID: 32900000, guid: 130c79cca29aab94ba3ced956841d265, type: 3}
     - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
       propertyPath: cutScenePanel
       value: 
@@ -4538,9 +4710,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2a7eb33e0e7f01c4f9519eb4c33723f0, type: 3}
     - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
+      propertyPath: hintCutScenePanel
+      value: 
+      objectReference: {fileID: 1311382819}
+    - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
+      propertyPath: hintCutScenePlayer
+      value: 
+      objectReference: {fileID: 1803511202}
+    - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
       propertyPath: inventoryItemImage
       value: 
       objectReference: {fileID: 2062213348}
+    - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
+      propertyPath: storyCutScenePanel
+      value: 
+      objectReference: {fileID: 474291923}
+    - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
+      propertyPath: storyCutScenePlayer
+      value: 
+      objectReference: {fileID: 177417448}
     - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
       propertyPath: itemInInventoryImage
       value: 
@@ -4746,13 +4934,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FightManager
   attackPopup: {fileID: 140343175}
+  crosshair: {fileID: 219086853}
+  victoryPopup: {fileID: 1893563004}
+  losePanel: {fileID: 1599452217}
   ghostTimeTimer: {fileID: 1066810967}
   cameraManager: {fileID: 1404102985}
-  crosshair: {fileID: 219086853}
   lightRevolver: {fileID: 358964151}
-  victoryPopup: {fileID: 1893563004}
   maxFightTime: 30
-  losePanel: {fileID: 1599452217}
   ghost1: {fileID: 1340214790}
   ghost2: {fileID: 977264076}
   ghost3: {fileID: 1649252513}
@@ -5901,9 +6089,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 455147851}
     - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
+      propertyPath: hintVideo
+      value: 
+      objectReference: {fileID: 32900000, guid: a12ce6a2b62fc05408878aeed4d5a949, type: 3}
+    - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 455147851}
+    - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
+      propertyPath: storyVideo
+      value: 
+      objectReference: {fileID: 32900000, guid: 76a4c5ac7091f7f45822ae19256f73b3, type: 3}
     - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
       propertyPath: cutScenePanel
       value: 
@@ -5937,9 +6133,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b7f10d26f43fc2249bac7a089f4f93e0, type: 3}
     - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
+      propertyPath: hintCutScenePanel
+      value: 
+      objectReference: {fileID: 1311382819}
+    - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
+      propertyPath: hintCutScenePlayer
+      value: 
+      objectReference: {fileID: 1803511202}
+    - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
       propertyPath: inventoryItemImage
       value: 
       objectReference: {fileID: 2062213348}
+    - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
+      propertyPath: storyCutScenePanel
+      value: 
+      objectReference: {fileID: 474291923}
+    - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
+      propertyPath: storyCutScenePlayer
+      value: 
+      objectReference: {fileID: 177417448}
     - target: {fileID: 3891968674068923676, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.555
@@ -6692,7 +6904,7 @@ GameObject:
   - component: {fileID: 1311382822}
   - component: {fileID: 1311382821}
   m_Layer: 5
-  m_Name: CutscenePanel
+  m_Name: HintCutscenePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7822,6 +8034,7 @@ RectTransform:
   - {fileID: 1893563007}
   - {fileID: 1599452220}
   - {fileID: 1311382820}
+  - {fileID: 474291924}
   - {fileID: 826655331}
   - {fileID: 1469200416}
   m_Father: {fileID: 0}
@@ -9340,7 +9553,7 @@ GameObject:
   - component: {fileID: 1803511203}
   - component: {fileID: 1803511202}
   m_Layer: 0
-  m_Name: CutScenePlayer
+  m_Name: HintCutScenePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9366,7 +9579,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 7
+  m_PlaybackSpeed: 3
   m_AudioOutputMode: 2
   m_TargetAudioSources:
   - {fileID: 0}
@@ -11138,6 +11351,7 @@ SceneRoots:
   - {fileID: 1541964580}
   - {fileID: 1608940807}
   - {fileID: 1803511203}
+  - {fileID: 177417449}
   - {fileID: 455147852}
   - {fileID: 1428508612}
   - {fileID: 1831826850}
