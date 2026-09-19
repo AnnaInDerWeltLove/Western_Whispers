@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraSwitch : MonoBehaviour
+public class PlayerCameraSwitch : MonoBehaviour
 {
     [SerializeField] private Camera moveCamera;
     [SerializeField] private Camera aimCamera;
