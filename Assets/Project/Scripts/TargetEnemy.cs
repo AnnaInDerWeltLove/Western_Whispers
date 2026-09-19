@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Targeting : MonoBehaviour
+public class TargetEnemy : MonoBehaviour
 { 
     [SerializeField] private Camera aimCamera;
     [SerializeField] private float maxAimDistance = 100f;

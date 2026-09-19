@@ -4,7 +4,7 @@ public class LightRevolver : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform muzzlePoint;
-    [SerializeField] private Targeting targeting;
+    [SerializeField] private TargetEnemy targetEnemy;
     private bool canShoot = false;
     
     void Update()
@@ -27,7 +27,7 @@ public class LightRevolver : MonoBehaviour
     private void Shoot()
     {
             
-            Vector3 aimPoint = targeting.GetAimPoint();
+            Vector3 aimPoint = targetEnemy.GetAimPoint();
             Debug.Log("Zielpunkt getroffen: " + aimPoint);
             Vector3 shootDirection = (aimPoint - muzzlePoint.position).normalized;
             GameObject projectile = Instantiate(projectilePrefab, muzzlePoint.position,muzzlePoint.rotation);

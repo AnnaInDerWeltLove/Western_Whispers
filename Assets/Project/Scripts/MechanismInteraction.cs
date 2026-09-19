@@ -24,7 +24,7 @@ public class MechanismInteraction : MonoBehaviour
     [Header("Puzzle")]
     [SerializeField] private PuzzleManager puzzleManager; 
     [SerializeField] private int puzzleID = 1;
-    [SerializeField] private Movement movement;
+    [SerializeField] private MovementTest movementTest;
     
     
     private bool playerInside;
@@ -51,7 +51,7 @@ public class MechanismInteraction : MonoBehaviour
     }
     private void StartMechanismSequence()
     {
-        movement.enabled = false;
+        movementTest.enabled = false;
         mechanismActivated = true;
         sequenceRunning = true;
         hintCutScenePanel.SetActive(true);
@@ -93,7 +93,7 @@ public class MechanismInteraction : MonoBehaviour
             return;
         }
         storyCutScenePanel.SetActive(false);
-        movement.enabled = true;
+        movementTest.enabled = true;
         sequenceRunning = false;
         puzzleManager.CompletedPuzzle(puzzleID);
     }
