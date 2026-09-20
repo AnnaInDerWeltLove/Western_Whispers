@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//KI generiert
 public class WorldManager : MonoBehaviour
 {
     // Verwendung von Headern zur Übersichtlichkeit
