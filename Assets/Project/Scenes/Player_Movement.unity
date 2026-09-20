@@ -1126,6 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   speed: 5
   cameraTransform: {fileID: 0}
+  animator: {fileID: 0}
   jumpForce: 3
   groundCheckDistance: 0.6
   groundLayer:
@@ -2154,7 +2155,7 @@ GameObject:
   - component: {fileID: 555621871}
   - component: {fileID: 555621874}
   m_Layer: 0
-  m_Name: FP Camera
+  m_Name: FirstPersonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2794,7 +2795,7 @@ GameObject:
   - component: {fileID: 646082340}
   - component: {fileID: 646082343}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: ThirdPersonCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3535,9 +3536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ca65f7b80e92b42a449c5e8ea28f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraSwitch
-  moveCamera: {fileID: 646082342}
-  aimCamera: {fileID: 555621873}
-  switchKey: 99
+  camera1: {fileID: 0}
+  camera2: {fileID: 0}
 --- !u!1001 &932716102
 PrefabInstance:
   m_ObjectHideFlags: 0

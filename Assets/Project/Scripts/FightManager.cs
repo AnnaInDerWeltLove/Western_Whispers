@@ -11,7 +11,7 @@ public class FightManager : MonoBehaviour
    
    [Header("References")]
    [SerializeField] private GhostTimeTimer ghostTimeTimer;
-   [SerializeField] private CameraManager cameraManager;
+   [SerializeField] private PlayFightSwitch playFightSwitch;
    [SerializeField] private LightRevolver lightRevolver;
    
    [Header("Fight Settings")]
@@ -62,16 +62,13 @@ public class FightManager : MonoBehaviour
    {
       attackPopup.SetActive(false);
       crosshair.SetActive(true);
-      cameraManager.SwitchToFightCamera();
+      playFightSwitch.SwitchToFightCamera();
       lightRevolver.EnableShooting();
       currentFightTime = maxFightTime;
       fightTimerRunning = true;
       Cursor.lockState = CursorLockMode.None;
       Cursor.visible = false;
-      ghost1.SetActive(false);
-      ghost2.SetActive(false);
-      ghost3.SetActive(false);
-     switch (currentClueID)
+      switch (currentClueID)
       {
          case 1:
             ghost1.SetActive(true);
@@ -101,7 +98,7 @@ public class FightManager : MonoBehaviour
    public void ExitFight()
    {
       victoryPopup.SetActive(false);
-      cameraManager.SwitchToMainCamera();
+      playFightSwitch.SwitchToPlayCamera();
       ghostTimeTimer.UnfreezeGhostTime();
       Cursor.lockState = CursorLockMode.Locked;
       Cursor.visible = false;

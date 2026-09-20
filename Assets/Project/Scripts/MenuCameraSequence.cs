@@ -121,7 +121,7 @@ public class MenuCameraSequence : MonoBehaviour
         
         yield return new WaitForSeconds(2f);
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Level1");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level1Test");
     }
 
     private IEnumerator BlinkLight()

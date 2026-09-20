@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 345897727}
   - component: {fileID: 345897726}
   m_Layer: 0
-  m_Name: FP Camera
+  m_Name: FirstPersonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 1676820771}
   - component: {fileID: 1676820774}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: ThirdPersonCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

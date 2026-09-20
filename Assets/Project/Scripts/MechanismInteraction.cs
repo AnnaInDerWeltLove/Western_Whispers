@@ -11,6 +11,7 @@ public class MechanismInteraction : MonoBehaviour
     [SerializeField] private VideoPlayer storyCutScenePlayer;
     [SerializeField] private GameObject storyCutScenePanel;
     [SerializeField] private VideoClip storyVideo;
+    [SerializeField] private CreditsManager creditsManager;
     
     
     [Header("Reward Part")]
@@ -24,7 +25,7 @@ public class MechanismInteraction : MonoBehaviour
     [Header("Puzzle")]
     [SerializeField] private PuzzleManager puzzleManager; 
     [SerializeField] private int puzzleID = 1;
-    [SerializeField] private MovementTest movementTest;
+    [SerializeField] private Movement movement;
     
     
     private bool playerInside;
@@ -51,7 +52,7 @@ public class MechanismInteraction : MonoBehaviour
     }
     private void StartMechanismSequence()
     {
-        movementTest.enabled = false;
+        movement.enabled = false;
         mechanismActivated = true;
         sequenceRunning = true;
         hintCutScenePanel.SetActive(true);
@@ -93,9 +94,17 @@ public class MechanismInteraction : MonoBehaviour
             return;
         }
         storyCutScenePanel.SetActive(false);
-        movementTest.enabled = true;
+        movement.enabled = true;
         sequenceRunning = false;
-        puzzleManager.CompletedPuzzle(puzzleID);
+        if (puzzleID == 3)
+        {
+            creditsManager.ShowCredits();
+        }
+        else
+        {
+            puzzleManager.CompletedPuzzle(puzzleID);
+        }
+        
     }
     private void OnTriggerEnter(Collider other)
     {
