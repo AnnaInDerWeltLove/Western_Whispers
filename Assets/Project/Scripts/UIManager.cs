@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class UIManager : MonoBehaviour
+/*public class UIManager : MonoBehaviour
 {   
     [Header("Player")]
     [SerializeField] private Player player;
@@ -142,3 +142,4 @@ public class UIManager : MonoBehaviour
         }
     }
 }
+*/

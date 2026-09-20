@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
     [Header("Bewegung")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Animator animator;
     
     [Header("Sprung")]
     [SerializeField] private float jumpForce = 3f;
@@ -40,6 +41,11 @@ public class Movement : MonoBehaviour
         {
             jumpRequested = true;
         }
+        bool isMoving =
+            Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01f ||
+            Mathf.Abs(Input.GetAxis("Vertical")) > 0.01f;
+
+        animator.SetBool("IsMoving", isMoving);
     }
 
     void FixedUpdate()
