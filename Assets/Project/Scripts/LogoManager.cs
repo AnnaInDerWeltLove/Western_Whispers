@@ -12,6 +12,7 @@ public class LogoManager : MonoBehaviour
     [SerializeField] private RectTransform logoTransform;
     [SerializeField] private float startScale = 0.85f;
     [SerializeField] private GameObject secondImage;
+    [SerializeField] private float durationBetweenLogoParts = 1f;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class LogoManager : MonoBehaviour
         }
         logoCanvasGroup.alpha = 1f;
         logoTransform.localScale = Vector3.one;
+        yield return new WaitForSeconds(durationBetweenLogoParts);
         secondImage.SetActive(true);
 
         // Logo stehen lassen
