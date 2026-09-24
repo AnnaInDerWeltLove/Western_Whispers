@@ -19,8 +19,9 @@ public class MenuScene : MonoBehaviour
     [SerializeField] private GameObject fortschrittPanel;
     [SerializeField] private GameObject einstellungPanel;
     [SerializeField] private Toggle fullscreenToggle;
-    [SerializeField] private Slider volumeSlider;
-    [SerializeField] private Toggle soundToggle;
+    
+    [Header("Fortschritt")]
+    [SerializeField] private Button saloonButton;
 
     [Header("Hauptmenü-Buttons")]
     [SerializeField] private Button[] mainMenuButtons;
@@ -31,6 +32,11 @@ public class MenuScene : MonoBehaviour
     [SerializeField] private Light directionalLight;
     [SerializeField] private float normalLightIntensity = 1f;
     [SerializeField] private float darkLightIntensity = 0.15f;
+    
+    [Header("Sound")]
+    [SerializeField] private SoundManager soundManager;
+    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Toggle soundToggle;
 
     [Header("Übergang")]
     [SerializeField] private GameObject blackScreen;
@@ -64,12 +70,9 @@ public class MenuScene : MonoBehaviour
         fullscreenToggle.SetIsOnWithoutNotify(fullscreen);
         float volume = PlayerPrefs.GetFloat("MasterVolume", 1f);
 
-        AudioListener.volume = volume;
-        volumeSlider.SetValueWithoutNotify(volume);
-        bool soundEnabled = PlayerPrefs.GetInt("SoundEnabled", 1) == 1;
-
-        AudioListener.pause = !soundEnabled;
-        soundToggle.SetIsOnWithoutNotify(soundEnabled);
+        volumeSlider.SetValueWithoutNotify(soundManager.MusicVolume);
+        soundToggle.SetIsOnWithoutNotify(!soundManager.IsMuted);
+        UpdateProgressMenu();
 
         blackScreen.SetActive(false);
 
@@ -246,7 +249,19 @@ public class MenuScene : MonoBehaviour
         lightOff.SetActive(true);
         directionalLight.intensity = darkLightIntensity;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
+        
+        lightOn.SetActive(true);
+        lightOff.SetActive(false);
+        directionalLight.intensity = normalLightIntensity;
+
+        yield return new WaitForSeconds(0.20f);
+        
+        lightOn.SetActive(false);
+        lightOff.SetActive(true);
+        directionalLight.intensity = darkLightIntensity;
+
+        yield return new WaitForSeconds(0.1f);
     }
     public void OpenFortschritt()
     {
@@ -315,9 +330,8 @@ public class MenuScene : MonoBehaviour
     }
     public void SetVolume(float volume)
     {
-        AudioListener.volume = volume;
-        PlayerPrefs.SetFloat("MasterVolume", volume);
-        PlayerPrefs.Save();
+        soundManager.SetMusicVolume(volume);
+        soundManager.SetSoundEffectVolume(volume);
     }
     public void SetFullscreen(bool fullscreen)
     {
@@ -333,9 +347,20 @@ public class MenuScene : MonoBehaviour
     }
     public void SetSoundEnabled(bool soundEnabled)
     {
-        AudioListener.pause = !soundEnabled;
+        soundManager.SetMuted(!soundEnabled);
+    }
+    private void UpdateProgressMenu()
+    {
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 0);
 
-        PlayerPrefs.SetInt("SoundEnabled", soundEnabled ? 1 : 0);
-        PlayerPrefs.Save();
+        if (unlockedLevel >= 1)
+        {
+            saloonButton.targetGraphic.color = Color.white;
+            saloonButton.interactable = true;
+        }
+        else
+        {
+            saloonButton.interactable = false;
+        }
     }
 }

@@ -98,6 +98,12 @@ public class MechanismInteraction : MonoBehaviour
         sequenceRunning = false;
         if (puzzleID == 3)
         {
+            int currentProgress = PlayerPrefs.GetInt("UnlockedLevel", 0);
+            if(currentProgress < 1)
+            {
+             PlayerPrefs.SetInt("UnlockedLevel", 1);
+             PlayerPrefs.Save();
+            }
             creditsManager.ShowCredits();
         }
         else
