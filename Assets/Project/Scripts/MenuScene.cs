@@ -18,6 +18,9 @@ public class MenuScene : MonoBehaviour
     [Header("Untermenüs")]
     [SerializeField] private GameObject fortschrittPanel;
     [SerializeField] private GameObject einstellungPanel;
+    [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Toggle soundToggle;
 
     [Header("Hauptmenü-Buttons")]
     [SerializeField] private Button[] mainMenuButtons;
@@ -55,6 +58,18 @@ public class MenuScene : MonoBehaviour
 
         menuCanvasGroup.interactable = false;
         menuCanvasGroup.blocksRaycasts = false;
+        bool fullscreen = PlayerPrefs.GetInt("Fullscreen", Screen.fullScreen ? 1 : 0) == 1;
+
+        Screen.fullScreen = fullscreen; 
+        fullscreenToggle.SetIsOnWithoutNotify(fullscreen);
+        float volume = PlayerPrefs.GetFloat("MasterVolume", 1f);
+
+        AudioListener.volume = volume;
+        volumeSlider.SetValueWithoutNotify(volume);
+        bool soundEnabled = PlayerPrefs.GetInt("SoundEnabled", 1) == 1;
+
+        AudioListener.pause = !soundEnabled;
+        soundToggle.SetIsOnWithoutNotify(soundEnabled);
 
         blackScreen.SetActive(false);
 
@@ -297,5 +312,30 @@ public class MenuScene : MonoBehaviour
                 button.animator.Update(0f);
             }
         }
+    }
+    public void SetVolume(float volume)
+    {
+        AudioListener.volume = volume;
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+        PlayerPrefs.Save();
+    }
+    public void SetFullscreen(bool fullscreen)
+    {
+        Screen.fullScreen = fullscreen;
+
+        PlayerPrefs.SetInt("Fullscreen", fullscreen ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Spiel wird beendet");
+    }
+    public void SetSoundEnabled(bool soundEnabled)
+    {
+        AudioListener.pause = !soundEnabled;
+
+        PlayerPrefs.SetInt("SoundEnabled", soundEnabled ? 1 : 0);
+        PlayerPrefs.Save();
     }
 }
