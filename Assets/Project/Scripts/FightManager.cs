@@ -68,9 +68,6 @@ public class FightManager : MonoBehaviour
       fightTimerRunning = true;
       Cursor.lockState = CursorLockMode.None;
       Cursor.visible = false;
-      ghost1.SetActive(false);
-      ghost2.SetActive(false);
-      ghost3.SetActive(false);
       switch (currentClueID)
       {
          case 1:
