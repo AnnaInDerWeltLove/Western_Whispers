@@ -16,7 +16,7 @@ public class LightProjectile : MonoBehaviour
       {
          ghost.Hit();
          Destroy(gameObject);
-         Destroy(ghost.gameObject);
+        // Destroy(ghost.gameObject);
       }
    }
 }
