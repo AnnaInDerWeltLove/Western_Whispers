@@ -872,6 +872,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
+      propertyPath: ghostTimeTimer
+      value: 
+      objectReference: {fileID: 537181678}
+    - target: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
       propertyPath: inventoryPanel
       value: 
       objectReference: {fileID: 1629547671}
@@ -1130,7 +1134,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
+  m_PlaybackSpeed: 10
   m_AudioOutputMode: 2
   m_TargetAudioSources:
   - {fileID: 0}
@@ -1170,6 +1174,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 143250494092748988, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
   m_PrefabInstance: {fileID: 1944744169}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &135545865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
+  m_PrefabInstance: {fileID: 1944744169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135545862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb63381ca0923845a7f1147387f156c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MechanismInteraction
 --- !u!4 &137429486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7220384014521848658, guid: 74b2c4d4a63665344aed8e13e23f7949, type: 3}
@@ -2549,6 +2564,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 143250494092748988, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
   m_PrefabInstance: {fileID: 89560880}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &334146417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1163466078009144651, guid: c49c49b028c4fb04eb01618ecb755a5b, type: 3}
+  m_PrefabInstance: {fileID: 89560880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334146414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb63381ca0923845a7f1147387f156c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MechanismInteraction
 --- !u!1 &340190049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,6 +3668,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
+      propertyPath: ghostTimeTimer
+      value: 
+      objectReference: {fileID: 537181678}
+    - target: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
       propertyPath: inventoryPanel
       value: 
       objectReference: {fileID: 1629547671}
@@ -4694,6 +4724,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 143250494092748988, guid: 8b46c985564f4854f929cb374d741400, type: 3}
   m_PrefabInstance: {fileID: 595040089}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &747718996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1163466078009144651, guid: 8b46c985564f4854f929cb374d741400, type: 3}
+  m_PrefabInstance: {fileID: 595040089}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747718993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb63381ca0923845a7f1147387f156c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MechanismInteraction
 --- !u!1 &754282307
 GameObject:
   m_ObjectHideFlags: 0
@@ -10741,6 +10782,9 @@ MonoBehaviour:
   movement: {fileID: 1619183875}
   thirdPersonCameraControl: {fileID: 771356666}
   firstPersonCameraControl: {fileID: 539731030}
+  mechanism1: {fileID: 135545865}
+  mechanism2: {fileID: 747718996}
+  mechanism3: {fileID: 334146417}
 --- !u!4 &1810823819
 Transform:
   m_ObjectHideFlags: 0
@@ -11225,6 +11269,10 @@ PrefabInstance:
       propertyPath: cutScenePlayer
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
+      propertyPath: ghostTimeTimer
+      value: 
+      objectReference: {fileID: 537181678}
     - target: {fileID: 1163466078009144651, guid: 4f9ae2bbea5dc3d488c71c425ab97aff, type: 3}
       propertyPath: inventoryPanel
       value: 

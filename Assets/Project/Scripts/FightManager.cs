@@ -14,6 +14,7 @@ public class FightManager : MonoBehaviour
    [SerializeField] private PlayFightSwitch playFightSwitch;
    [SerializeField] private LightRevolver lightRevolver;
    
+   
    [Header("Fight Settings")]
    [SerializeField] private float maxFightTime = 40f;
    
@@ -26,6 +27,11 @@ public class FightManager : MonoBehaviour
    [SerializeField] private Movement movement;
    [SerializeField] private CameraControl thirdPersonCameraControl;
    [SerializeField] private CameraControl firstPersonCameraControl;
+   
+   [Header("Hint Cutscenes")]
+   [SerializeField] private MechanismInteraction mechanism1;
+   [SerializeField] private MechanismInteraction mechanism2;
+   [SerializeField] private MechanismInteraction mechanism3;
    
    private int currentClueID;
    private float currentFightTime;
@@ -110,9 +116,24 @@ public class FightManager : MonoBehaviour
    {
       victoryPopup.SetActive(false);
       playFightSwitch.SwitchToPlayCamera();
-      ghostTimeTimer.UnfreezeGhostTime();
+
       Cursor.lockState = CursorLockMode.Locked;
       Cursor.visible = false;
+
+      switch (currentClueID)
+      {
+         case 1:
+            mechanism1.PlayHintCutscene();
+            break;
+
+         case 2:
+            mechanism2.PlayHintCutscene();
+            break;
+
+         case 3:
+            mechanism3.PlayHintCutscene();
+            break;
+      }
    }
    private void LoseFight()
    {

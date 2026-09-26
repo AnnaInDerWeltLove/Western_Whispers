@@ -26,6 +26,7 @@ public class MechanismInteraction : MonoBehaviour
     [SerializeField] private PuzzleManager puzzleManager; 
     [SerializeField] private int puzzleID = 1;
     [SerializeField] private Movement movement;
+    [SerializeField] private GhostTimeTimer ghostTimeTimer;
     
     [Header("Steuerung während Sequenz")]
     [SerializeField] private GameObject playerInterface;
@@ -34,6 +35,8 @@ public class MechanismInteraction : MonoBehaviour
     [SerializeField] private PlayerCameraSwitch playerCameraSwitch;
     [SerializeField] private WorldManager worldManager;
     [SerializeField] private UIInteractionController uiInteractionController;
+    
+    
     
     
     private bool playerInside;
@@ -58,35 +61,42 @@ public class MechanismInteraction : MonoBehaviour
 
         }
     }
+    public void PlayHintCutscene()
+    {
+        DisablePlayerControls();
+        playerInterface.SetActive(false);
+
+        hintCutScenePanel.SetActive(true);
+        hintCutScenePlayer.clip = hintVideo;
+        hintCutScenePlayer.Play();
+    }
     private void StartMechanismSequence()
     {
         movement.enabled = false;
         mechanismActivated = true;
         sequenceRunning = true;
-        hintCutScenePanel.SetActive(true);
+        storyCutScenePanel.SetActive(true);
+        storyCutScenePlayer.clip = storyVideo;
+        storyCutScenePlayer.Play();
         DisablePlayerControls();
-        hintCutScenePlayer.clip = hintVideo;
-        hintCutScenePlayer.Play(); 
-        
     }
     private void OnHintCutsceneFinished(VideoPlayer vp)
     {
-        if (!sequenceRunning)
-        {
-            return;
-        }
         hintCutScenePanel.SetActive(false);
-        rewardItemImage.sprite = rewardItemSprite;
-        rewardItemPanel.SetActive(true);
-        Invoke(nameof(ShowItemInInventory), 2f);
+        playerInterface.SetActive(true);
+        EnablePlayerControls();
+        
+        ghostTimeTimer.UnfreezeGhostTime();
       
     }
     private void ShowItemInInventory()
     {
         inventory.AddItem(rewardItemSprite);
         inventory.OpenInventory();
+
         rewardItemPanel.SetActive(false);
-        Invoke(nameof(StartStoryCutscene), 2f);
+
+        Invoke(nameof(FinishMechanismSequence), 2f);
     }
     private void StartStoryCutscene()
     {
@@ -102,26 +112,44 @@ public class MechanismInteraction : MonoBehaviour
         {
             return;
         }
+
         storyCutScenePanel.SetActive(false);
+
+        rewardItemImage.sprite = rewardItemSprite;
+        rewardItemPanel.SetActive(true);
+
+        Invoke(nameof(ShowItemInInventory), 2f);
+    }
+    
+    private void FinishMechanismSequence()
+    {
+        inventory.CloseInventory();
+        inventory.AddItem(rewardItemSprite);
+        rewardItemPanel.SetActive(false);
         EnablePlayerControls();
+        
+
         movement.enabled = true;
         sequenceRunning = false;
+
         if (puzzleID == 3)
         {
             int currentProgress = PlayerPrefs.GetInt("UnlockedLevel", 0);
-            if(currentProgress < 1)
+
+            if (currentProgress < 1)
             {
-             PlayerPrefs.SetInt("UnlockedLevel", 1);
-             PlayerPrefs.Save();
+                PlayerPrefs.SetInt("UnlockedLevel", 1);
+                PlayerPrefs.Save();
             }
+
             creditsManager.ShowCredits();
         }
         else
         {
             puzzleManager.CompletedPuzzle(puzzleID);
         }
-        
     }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
