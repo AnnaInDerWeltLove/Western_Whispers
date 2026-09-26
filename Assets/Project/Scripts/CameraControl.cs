@@ -3,39 +3,41 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraControl : MonoBehaviour
 {
-    [Header("Referenzen")]
-    [SerializeField] private Transform playerBody;      // Wird zur Blickrichtung gedreht
-    [SerializeField] private Transform cameraPivot;      // Punkt, um den die Kamera rotiert
+    [Header("Referenzen")] [SerializeField]
+    private Transform playerBody; // Wird zur Blickrichtung gedreht
+
+    [SerializeField] private Transform cameraPivot; // Punkt, um den die Kamera rotiert
     [SerializeField] private Camera mainCamera;
 
-    [Header("Maus-Einstellungen")]
-    [SerializeField] private float mouseSensitivity = 2f;
+    [Header("Maus-Einstellungen")] [SerializeField]
+    private float mouseSensitivity = 2f;
+
     [SerializeField] private bool invertY = false;
 
-    [Header("Zielmodus")]
-    [SerializeField] private KeyCode aimKey = KeyCode.C; // Rechte Maustaste
+    [Header("Zielmodus")] [SerializeField] private KeyCode aimKey = KeyCode.C; // Rechte Maustaste
     [SerializeField] private float aimMoveSpeedMultiplier = 0.5f; // Für Bewegung während des Zielens
 
-    [Header("Zoom")]
-    [SerializeField] private float normalFOV = 60f;
+    [Header("Zoom")] [SerializeField] private float normalFOV = 60f;
     [SerializeField] private float aimFOV = 35f;
     [SerializeField] private float fovTransitionSpeed = 10f;
 
-    [Header("Kamera-Grenzen")]
-    [SerializeField] private float minPitch = -60f;
+    [Header("Kamera-Grenzen")] [SerializeField]
+    private float minPitch = -60f;
+
     [SerializeField] private float maxPitch = 80f;
 
-    [Header("Ziel-Erkennung")]
-    [SerializeField] private float maxAimDistance = 100f;
-    [SerializeField] private LayerMask aimLayerMask = ~0;
+    [Header("Ziel-Erkennung")] [SerializeField]
+    private float maxAimDistance = 100f;
 
+    [SerializeField] private LayerMask aimLayerMask = ~0;
+    
     private float yaw;
     private float pitch;
     private bool isAiming;
-
+   
     public bool IsAiming => isAiming;
     public float CurrentSpeedMultiplier => isAiming ? aimMoveSpeedMultiplier : 1f;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,6 +46,7 @@ public class CameraControl : MonoBehaviour
 
         if (mainCamera == null)
             mainCamera = GetComponent<Camera>();
+        
 
         yaw = playerBody != null ? playerBody.eulerAngles.y : 0f;
         mainCamera.fieldOfView = normalFOV;
@@ -65,6 +68,7 @@ public class CameraControl : MonoBehaviour
             MouseLock();
         }
     }
+
     private void HandleAimInput()
     {
         isAiming = Input.GetKeyDown(aimKey);
@@ -111,7 +115,7 @@ public class CameraControl : MonoBehaviour
             Time.deltaTime * fovTransitionSpeed
         );
     }
-    
+
     /// <summary>
     /// Gibt den Punkt zurück, auf den gerade gezielt wird (Bildschirmmitte -> Raycast).
     /// Nützlich für Waffen, Fadenkreuz-Ausrichtung, Zielmarkierung etc.

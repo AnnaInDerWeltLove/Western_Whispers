@@ -7,6 +7,14 @@ public class IntroManager : MonoBehaviour
     [SerializeField] private VideoPlayer introVideoPlayer;
     [SerializeField] private Movement movement;
     [SerializeField] private TutorialManager tutorialManager;
+    
+    [Header("Während Intro ausblenden / sperren")]
+    [SerializeField] private GameObject playerInterface;
+    [SerializeField] private CameraControl thirdPersonCameraControl;
+    [SerializeField] private CameraControl firstPersonCameraControl;
+    [SerializeField] private PlayerCameraSwitch playerCameraSwitch;
+    [SerializeField] private WorldManager worldManager;
+    [SerializeField] private UIInteractionController uiInteractionController;
 
     private static bool introAlreadyPlayed = false;
 
@@ -15,9 +23,10 @@ public class IntroManager : MonoBehaviour
         if (introAlreadyPlayed)
         {
             introPanel.SetActive(false);
+            EnablePlayerControls();
             return;
         }
-
+        DisablePlayerControls();
         introAlreadyPlayed = true;
 
         movement.enabled = false;
@@ -37,7 +46,30 @@ public class IntroManager : MonoBehaviour
     private void OnIntroFinished(VideoPlayer vp)
     {
         introPanel.SetActive(false);
+        EnablePlayerControls();
         movement.enabled = true;
         tutorialManager.ShowMovementTutorial();
+    }
+    
+    private void DisablePlayerControls()
+    {
+        movement.enabled = false;
+        thirdPersonCameraControl.enabled = false;
+        firstPersonCameraControl.enabled = false;
+        playerCameraSwitch.enabled = false;
+        worldManager.enabled = false;
+        uiInteractionController.enabled = false;
+        playerInterface.SetActive(false);
+    }
+
+    private void EnablePlayerControls()
+    {
+        movement.enabled = true;
+        thirdPersonCameraControl.enabled = true;
+        firstPersonCameraControl.enabled = true;
+        playerCameraSwitch.enabled = true;
+        worldManager.enabled = true;
+        uiInteractionController.enabled = true;
+        playerInterface.SetActive(true);
     }
 }

@@ -20,6 +20,8 @@ public class PuzzleManager : MonoBehaviour
     [Header("Fight Manager")]
     [SerializeField] private FightManager fightManager;
     
+    
+    
     private bool hint1Unlocked;
     private bool hint2Unlocked;
     private bool hint3Unlocked;

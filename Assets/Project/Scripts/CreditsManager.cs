@@ -11,6 +11,15 @@ public class CreditsManager : MonoBehaviour
     [Header("Credits Bewegung")]
     [SerializeField] private float scrollSpeed = 50f;
     [SerializeField] private float buttonDelay = 5f;
+    
+    [Header("Während Intro ausblenden / sperren")]
+    [SerializeField] private GameObject playerInterface;
+    [SerializeField] private CameraControl thirdPersonCameraControl;
+    [SerializeField] private CameraControl firstPersonCameraControl;
+    [SerializeField] private PlayerCameraSwitch playerCameraSwitch;
+    [SerializeField] private WorldManager worldManager;
+    [SerializeField] private UIInteractionController uiInteractionController;
+    [SerializeField] private Movement movement;
 
     private bool creditsRunning;
 
@@ -35,6 +44,7 @@ public class CreditsManager : MonoBehaviour
     {
         creditsPanel.SetActive(true);
         backButton.SetActive(false);
+        DisablePlayerControls();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -57,4 +67,17 @@ public class CreditsManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("Test1");
     }
+    
+    private void DisablePlayerControls()
+    {
+        movement.enabled = false;
+        thirdPersonCameraControl.enabled = false;
+        firstPersonCameraControl.enabled = false;
+        playerCameraSwitch.enabled = false;
+        worldManager.enabled = false;
+        uiInteractionController.enabled = false;
+
+        playerInterface.SetActive(false);
+    }
+    
 }

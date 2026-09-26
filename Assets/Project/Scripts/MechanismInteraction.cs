@@ -27,6 +27,14 @@ public class MechanismInteraction : MonoBehaviour
     [SerializeField] private int puzzleID = 1;
     [SerializeField] private Movement movement;
     
+    [Header("Steuerung während Sequenz")]
+    [SerializeField] private GameObject playerInterface;
+    [SerializeField] private CameraControl thirdPersonCameraControl;
+    [SerializeField] private CameraControl firstPersonCameraControl;
+    [SerializeField] private PlayerCameraSwitch playerCameraSwitch;
+    [SerializeField] private WorldManager worldManager;
+    [SerializeField] private UIInteractionController uiInteractionController;
+    
     
     private bool playerInside;
     private bool mechanismActivated = false;
@@ -56,6 +64,7 @@ public class MechanismInteraction : MonoBehaviour
         mechanismActivated = true;
         sequenceRunning = true;
         hintCutScenePanel.SetActive(true);
+        DisablePlayerControls();
         hintCutScenePlayer.clip = hintVideo;
         hintCutScenePlayer.Play(); 
         
@@ -94,6 +103,7 @@ public class MechanismInteraction : MonoBehaviour
             return;
         }
         storyCutScenePanel.SetActive(false);
+        EnablePlayerControls();
         movement.enabled = true;
         sequenceRunning = false;
         if (puzzleID == 3)
@@ -126,6 +136,28 @@ public class MechanismInteraction : MonoBehaviour
         {
             playerInside = false;
         }
+    }
+    
+    private void DisablePlayerControls()
+    {
+        movement.enabled = false;
+        thirdPersonCameraControl.enabled = false;
+        firstPersonCameraControl.enabled = false;
+        playerCameraSwitch.enabled = false;
+        worldManager.enabled = false;
+        uiInteractionController.enabled = false;
+        playerInterface.SetActive(false);
+    }
+
+    private void EnablePlayerControls()
+    {
+        movement.enabled = true;
+        thirdPersonCameraControl.enabled = true;
+        firstPersonCameraControl.enabled = true;
+        playerCameraSwitch.enabled = true;
+        worldManager.enabled = true;
+        uiInteractionController.enabled = true;
+        playerInterface.SetActive(true);
     }
 }
 

@@ -22,6 +22,11 @@ public class FightManager : MonoBehaviour
    [SerializeField] private GameObject ghost2;
    [SerializeField] private GameObject ghost3;
    
+   [Header("Bewegungskontrolle")]
+   [SerializeField] private Movement movement;
+   [SerializeField] private CameraControl thirdPersonCameraControl;
+   [SerializeField] private CameraControl firstPersonCameraControl;
+   
    private int currentClueID;
    private float currentFightTime;
    private bool fightTimerRunning;
@@ -54,6 +59,9 @@ public class FightManager : MonoBehaviour
       currentClueID = clueID;
       ghostTimeTimer.FreezeGhostTime();
       attackPopup.SetActive(true);
+      movement.enabled = false;
+      thirdPersonCameraControl.enabled = false;
+      firstPersonCameraControl.enabled = false;
       Cursor.lockState = CursorLockMode.None;
       Cursor.visible = true;
    }
@@ -62,6 +70,9 @@ public class FightManager : MonoBehaviour
    {
       attackPopup.SetActive(false);
       crosshair.SetActive(true);
+      movement.enabled = true;
+      thirdPersonCameraControl.enabled = true;
+      firstPersonCameraControl.enabled = true;
       playFightSwitch.SwitchToFightCamera();
       lightRevolver.EnableShooting();
       currentFightTime = maxFightTime;
