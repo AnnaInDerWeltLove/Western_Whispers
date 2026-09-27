@@ -111,7 +111,7 @@ public class CreditsManager : MonoBehaviour
     public void BackToMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Test1");
+        SceneManager.LoadScene("Menü");
     }
     
     private void DisablePlayerControls()

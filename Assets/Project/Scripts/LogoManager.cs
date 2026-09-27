@@ -47,7 +47,7 @@ public class LogoManager : MonoBehaviour
         // Logo stehen lassen
         yield return new WaitForSeconds(visibleDuration);
 
-        SceneManager.LoadScene("Test1");
+        SceneManager.LoadScene("Menü");
     }
     private void Awake()
     {

@@ -27,7 +27,7 @@ public class UIInteractionController : MonoBehaviour
     [SerializeField] private TutorialManager tutorialManager;
 
     [Header("Szenen")]
-    [SerializeField] private string mainMenuScene = "Test1";
+    [SerializeField] private string mainMenuScene = "Menü";
 
     private bool uiModeActive;
     private bool firstHoverDone;
