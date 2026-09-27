@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GhostTimeTimer : MonoBehaviour
 {
     [SerializeField] private float maxGhostTime = 60f;
     [SerializeField] private WorldManager worldManager;
+    [SerializeField] private Image ghostTimerFullImage;
+    [SerializeField] private Image ghostTimerEmptyImage;
     private float currentGhostTime;
     private bool isSpiritWorld;
     private bool isFrozen;
@@ -36,17 +39,22 @@ public class GhostTimeTimer : MonoBehaviour
                 currentGhostTime = maxGhostTime;
             }
         }
+        ghostTimerFullImage.fillAmount = currentGhostTime / maxGhostTime;
     }
 
     public void StartGhostTime()
     {
         
             isSpiritWorld = true;
+            ghostTimerEmptyImage.gameObject.SetActive(true);
+            ghostTimerFullImage.gameObject.SetActive(true);
         
     }
     public void StopGhostTime()
     {
         isSpiritWorld = false;
+        ghostTimerEmptyImage.gameObject.SetActive(false);
+        ghostTimerFullImage.gameObject.SetActive(false);
     }
 
     public void FreezeGhostTime()

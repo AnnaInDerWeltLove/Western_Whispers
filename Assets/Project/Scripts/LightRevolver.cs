@@ -26,7 +26,7 @@ public class LightRevolver : MonoBehaviour
 
     private void Shoot()
     {
-            
+            SoundManager.Instance.PlayShot();
             Vector3 aimPoint = targetEnemy.GetAimPoint();
             Debug.Log("Zielpunkt getroffen: " + aimPoint);
             Vector3 shootDirection = (aimPoint - muzzlePoint.position).normalized;

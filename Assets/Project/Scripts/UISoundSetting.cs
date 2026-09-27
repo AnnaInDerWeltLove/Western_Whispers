@@ -1,17 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// KI generiert
 public class UISoundSetting : MonoBehaviour
 {
-    [Header("Lautstärkeregler")]
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider soundEffectSlider;
-    [SerializeField] private Slider playerLaserSlider;
-    [SerializeField] private Slider enemyLaserSlider;
-    [SerializeField] private Slider bossLaserSlider;
+    [Header("Lautstärke")]
+    [SerializeField] private Slider volumeSlider;
 
-    [Header("Stummschaltung")]
-    [SerializeField] private Toggle muteToggle;
+    [Header("Sound")]
+    [SerializeField] private Toggle soundToggle;
+    
+    [Header("Vollbild")]
+    [SerializeField] private Toggle fullscreenToggle;
 
     private void Start()
     {
@@ -21,47 +21,44 @@ public class UISoundSetting : MonoBehaviour
             return;
         }
 
-        SetInitialValues();
-        RegisterListeners();
+        volumeSlider.SetValueWithoutNotify(
+            SoundManager.Instance.MasterVolume
+        );
+
+        soundToggle.SetIsOnWithoutNotify(
+            !SoundManager.Instance.IsMuted
+        );
+        bool isFullscreen = PlayerPrefs.GetInt(
+            "Fullscreen",
+            Screen.fullScreen ? 1 : 0
+        ) == 1;
+
+        fullscreenToggle.SetIsOnWithoutNotify(isFullscreen);
+
+        volumeSlider.onValueChanged.AddListener(SetVolume);
+        soundToggle.onValueChanged.AddListener(SetSoundEnabled);
     }
 
-    private void SetInitialValues()
+    private void SetVolume(float volume)
     {
-        musicSlider.value = SoundManager.Instance.MusicVolume;
-
-        soundEffectSlider.value = SoundManager.Instance.SoundEffectVolume;
-
-        playerLaserSlider.value = SoundManager.Instance.PlayerLaserVolume;
-       
-        enemyLaserSlider.value = SoundManager.Instance.EnemyLaserVolume;
-
-        bossLaserSlider.value = SoundManager.Instance.BossLaserVolume;
-
-        muteToggle.isOn = SoundManager.Instance.IsMuted;
+        SoundManager.Instance.SetMasterVolume(volume);
     }
 
-    private void RegisterListeners()
+    private void SetSoundEnabled(bool soundEnabled)
     {
-        musicSlider.onValueChanged.AddListener(SoundManager.Instance.SetMusicVolume);
-        soundEffectSlider.onValueChanged.AddListener(SoundManager.Instance.SetSoundEffectVolume);
-        playerLaserSlider.onValueChanged.AddListener(SoundManager.Instance.SetPlayerLaserVolume);
-        enemyLaserSlider.onValueChanged.AddListener(SoundManager.Instance.SetEnemyLaserVolume);
-        bossLaserSlider.onValueChanged.AddListener(SoundManager.Instance.SetBossLaserVolume);
-        muteToggle.onValueChanged.AddListener(SoundManager.Instance.SetMuted);
+        SoundManager.Instance.SetMuted(!soundEnabled);
     }
 
     private void OnDestroy()
     {
-        if (SoundManager.Instance == null)
-        {
-            return;
-        }
+        volumeSlider.onValueChanged.RemoveListener(SetVolume);
+        soundToggle.onValueChanged.RemoveListener(SetSoundEnabled);
+    }
+    public void SetFullscreen(bool fullscreen)
+    {
+        Screen.fullScreen = fullscreen;
 
-        musicSlider.onValueChanged.RemoveListener(SoundManager.Instance.SetMusicVolume);
-        soundEffectSlider.onValueChanged.RemoveListener(SoundManager.Instance.SetSoundEffectVolume);
-        playerLaserSlider.onValueChanged.RemoveListener(SoundManager.Instance.SetPlayerLaserVolume);
-        enemyLaserSlider.onValueChanged.RemoveListener(SoundManager.Instance.SetEnemyLaserVolume);
-        bossLaserSlider.onValueChanged.RemoveListener(SoundManager.Instance.SetBossLaserVolume);
-        muteToggle.onValueChanged.RemoveListener(SoundManager.Instance.SetMuted);
+        PlayerPrefs.SetInt("Fullscreen", fullscreen ? 1 : 0);
+        PlayerPrefs.Save();
     }
 }

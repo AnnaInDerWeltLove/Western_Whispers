@@ -3,8 +3,6 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     // Verwendung von Headern zur Übersichtlichkeit
-    [Header("Steuerung")]
-    [SerializeField] private KeyCode switchKey = KeyCode.Q;
     
     [Header("Licht")]
     [SerializeField] private Light directionalLight;
@@ -29,18 +27,9 @@ public class WorldManager : MonoBehaviour
     {
         SetNormalWorld();
     }
-
-    // Prüfung der Auslösung zum Weltenwechsel
-    private void Update()
-    {
-        if (Input.GetKeyDown(switchKey))
-        {
-            SwitchWorld();
-           
-        }
-    }
+    
     // Auslösen des Weltenwechsels
-    private void SwitchWorld()
+    public void SwitchWorld()
     {
         if (isSpiritWorld)
         {
@@ -62,6 +51,7 @@ public class WorldManager : MonoBehaviour
         RenderSettings.ambientIntensity = normalEnvironmentIntensity;
         DynamicGI.UpdateEnvironment();
         isSpiritWorld = false;
+        SoundManager.Instance.PlayNormalWorldMusic();
         OnWorldChanged?.Invoke(false);
     }
 
@@ -73,6 +63,7 @@ public class WorldManager : MonoBehaviour
         RenderSettings.ambientIntensity = spiritEnvironmentIntensity;
         DynamicGI.UpdateEnvironment();
         isSpiritWorld = true;
+        SoundManager.Instance.PlaySpiritWorldMusic();
         OnWorldChanged?.Invoke(true);
     }
 }

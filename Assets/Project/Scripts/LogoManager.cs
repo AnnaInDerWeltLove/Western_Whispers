@@ -8,7 +8,7 @@ public class LogoManager : MonoBehaviour
 
     [Header("Zeiten")]
     [SerializeField] private float fadeDuration = 1f;
-    [SerializeField] private float visibleDuration = 1.5f;
+    [SerializeField] private float visibleDuration = 4f;
     [SerializeField] private RectTransform logoTransform;
     [SerializeField] private float startScale = 0.85f;
     [SerializeField] private GameObject secondImage;
@@ -16,7 +16,9 @@ public class LogoManager : MonoBehaviour
 
     private void Start()
     {
+        
         StartCoroutine(ShowLogo());
+        SoundManager.Instance.PlayLogoMusic();
     }
 
     private IEnumerator ShowLogo()

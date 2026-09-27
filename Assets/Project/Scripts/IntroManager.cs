@@ -26,6 +26,7 @@ public class IntroManager : MonoBehaviour
             EnablePlayerControls();
             return;
         }
+        SoundManager.Instance.StopMusic();
         DisablePlayerControls();
         introAlreadyPlayed = true;
 
@@ -48,6 +49,7 @@ public class IntroManager : MonoBehaviour
         introPanel.SetActive(false);
         EnablePlayerControls();
         movement.enabled = true;
+        SoundManager.Instance.PlayNormalWorldMusic();
         tutorialManager.ShowMovementTutorial();
     }
     

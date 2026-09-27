@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class PuzzleManager : MonoBehaviour
     [Header("Fight Manager")]
     [SerializeField] private FightManager fightManager;
     
+    [Header("Fortschritt")]
+    [SerializeField] private TMP_Text progressText;
+    
     
     
     private bool hint1Unlocked;
@@ -38,6 +42,7 @@ public class PuzzleManager : MonoBehaviour
         hint1Unlocked = true;
         hint2Unlocked = false;
         hint3Unlocked = false;
+        progressText.text = "0 / 3";
     }
     private void Update()
     {
@@ -109,10 +114,15 @@ public class PuzzleManager : MonoBehaviour
         {
             case 1:
                 hint2Unlocked = true;
+                progressText.text = "1 / 3";
                 break;
 
             case 2:
                 hint3Unlocked = true;
+                progressText.text = "2 / 3";
+                break;
+            case 3:
+                progressText.text = "3 / 3";
                 break;
         }
     }

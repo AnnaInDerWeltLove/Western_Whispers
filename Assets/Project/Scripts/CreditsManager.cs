@@ -6,11 +6,10 @@ public class CreditsManager : MonoBehaviour
 {
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] private RectTransform creditsText;
-    [SerializeField] private GameObject backButton;
-
+ 
     [Header("Credits Bewegung")]
     [SerializeField] private float scrollSpeed = 50f;
-    [SerializeField] private float buttonDelay = 5f;
+    [SerializeField] private float endDelay = 2f;
     
     [Header("Während Intro ausblenden / sperren")]
     [SerializeField] private GameObject playerInterface;
@@ -20,13 +19,20 @@ public class CreditsManager : MonoBehaviour
     [SerializeField] private WorldManager worldManager;
     [SerializeField] private UIInteractionController uiInteractionController;
     [SerializeField] private Movement movement;
+    
+    [Header("Credits Übergang")]
+    [SerializeField] private CanvasGroup fadePanel;
+    [SerializeField] private float fadeDuration = 1.5f;
+    [SerializeField] private float blackScreenDuration = 1f;
 
     private bool creditsRunning;
 
     private void Start()
     {
         creditsPanel.SetActive(false);
-        backButton.SetActive(false);
+        fadePanel.alpha = 0f;
+        fadePanel.blocksRaycasts = false;
+        
     }
 
     private void Update()
@@ -38,28 +44,68 @@ public class CreditsManager : MonoBehaviour
 
         creditsText.anchoredPosition +=
             Vector2.up * scrollSpeed * Time.unscaledDeltaTime;
+
+        Vector3[] corners = new Vector3[4];
+        creditsText.GetWorldCorners(corners);
+
+// Unterkante des Credits-Textes
+        float bottomEdge = corners[0].y;
+
+// Oberkante des Bildschirms
+        float screenTop = Screen.height;
+
+        if (bottomEdge >= screenTop)
+        {
+            creditsRunning = false;
+            StartCoroutine(EndCreditsAfterDelay());
+        }
     }
 
     public void ShowCredits()
     {
+        StartCoroutine(FadeToCredits());
+    }
+
+    private IEnumerator FadeToCredits()
+    {
+        fadePanel.blocksRaycasts = true;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            fadePanel.alpha =
+                Mathf.Clamp01(elapsedTime / fadeDuration);
+
+            yield return null;
+        }
+
+        fadePanel.alpha = 1f;
+
+        yield return new WaitForSecondsRealtime(blackScreenDuration);
+
+        SoundManager.Instance.PlayCreditsMusic();
+
         creditsPanel.SetActive(true);
-        backButton.SetActive(false);
         DisablePlayerControls();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
         Time.timeScale = 0f;
-
         creditsRunning = true;
+        
 
-        StartCoroutine(ShowBackButtonAfterDelay());
+        fadePanel.alpha = 0f;
+        fadePanel.blocksRaycasts = false;
     }
-
-    private IEnumerator ShowBackButtonAfterDelay()
+    
+    private IEnumerator EndCreditsAfterDelay()
     {
-        yield return new WaitForSecondsRealtime(buttonDelay);
-        backButton.SetActive(true);
+        yield return new WaitForSecondsRealtime(endDelay);
+        BackToMenu();
     }
 
     public void BackToMenu()

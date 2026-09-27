@@ -1,46 +1,60 @@
 using UnityEngine;
 
+// KI generiert
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
     [Header("Musik")]
-    [SerializeField] private AudioClip introMusic;
-    [SerializeField] private AudioClip gameMusic;
-    [SerializeField] private AudioClip bossMusic;
+    [SerializeField] private AudioClip logoMusic;
+    [SerializeField] private AudioClip menuMusic;
+    [SerializeField] private AudioClip normalWorldMusic;
+    [SerializeField] private AudioClip spiritWorldMusic;
+    [SerializeField] private AudioClip fightMusic;
+    [SerializeField] private AudioClip creditsMusic;
 
-    [Header("Laser-Soundeffekte")]
-    [SerializeField] private AudioClip playerLaser;
-    [SerializeField] private AudioClip enemyLaser;
-    [SerializeField] private AudioClip bossLaser;
+    [Header("Soundeffekte")]
+    [SerializeField] private AudioClip footstepsSound;
+    [SerializeField] private AudioClip shotSound;
 
-    [Header("Startlautstärken")]
+    [Header("Individuelle Lautstärken")]
     [Range(0f, 1f)]
-    [SerializeField] private float musicVolume = 0.4f;
-
-    [Range(0f, 1f)]
-    [SerializeField] private float soundEffectVolume = 0.8f;
-
-    [Range(0f, 1f)]
-    [SerializeField] private float playerLaserVolume = 1f;
+    [SerializeField] private float logoVolume = 1f;
 
     [Range(0f, 1f)]
-    [SerializeField] private float enemyLaserVolume = 1f;
+    [SerializeField] private float menuVolume = 1f;
 
     [Range(0f, 1f)]
-    [SerializeField] private float bossLaserVolume = 1f;
+    [SerializeField] private float normalWorldVolume = 1f;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float spiritWorldVolume = 1f;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float fightVolume = 1f;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float footstepsVolume = 1f;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float shotVolume = 1f;
+    
+    [Range(0f, 1f)]
+    [SerializeField] private float creditsVolume = 1f;
+
+    [Header("Spieler-Einstellung")]
+    [Range(0f, 1f)]
+    [SerializeField] private float masterVolume = 1f;
 
     private AudioSource musicSource;
     private AudioSource soundEffectSource;
 
     private bool isMuted;
 
-    public float MusicVolume => musicVolume;
-    public float SoundEffectVolume => soundEffectVolume;
-    public float PlayerLaserVolume => playerLaserVolume;
-    public float EnemyLaserVolume => enemyLaserVolume;
-    public float BossLaserVolume => bossLaserVolume;
+    public float MasterVolume => masterVolume;
     public bool IsMuted => isMuted;
+
+    private float currentMusicIndividualVolume = 1f;
 
     private void Awake()
     {
@@ -66,98 +80,92 @@ public class SoundManager : MonoBehaviour
         ApplySettings();
     }
 
-    private void Start()
+    // -------------------------
+    // MUSIK
+    // -------------------------
+
+    public void PlayLogoMusic()
     {
-        PlayIntroMusic();
+        PlayMusic(logoMusic, logoVolume);
+    }
+
+    public void PlayMenuMusic()
+    {
+        PlayMusic(menuMusic, menuVolume);
+    }
+
+    public void PlayNormalWorldMusic()
+    {
+        PlayMusic(normalWorldMusic, normalWorldVolume);
+    }
+
+    public void PlaySpiritWorldMusic()
+    {
+        PlayMusic(spiritWorldMusic, spiritWorldVolume);
+    }
+
+    public void PlayFightMusic()
+    {
+        PlayMusic(fightMusic, fightVolume);
     }
     
-    public void PlayIntroMusic()
+    public void PlayCreditsMusic()
     {
-        PlayMusic(introMusic);
+        PlayMusic(creditsMusic, creditsVolume);
     }
 
-    public void PlayGameMusic()
-    {
-        PlayMusic(gameMusic);
-    }
-
-    public void PlayBossMusic()
-    {
-        PlayMusic(bossMusic);
-    }
-
-    private void PlayMusic(AudioClip newMusic)
+    private void PlayMusic(AudioClip newMusic, float individualVolume)
     {
         if (newMusic == null)
-        {
             return;
-        }
+
+        currentMusicIndividualVolume = individualVolume;
 
         if (musicSource.clip == newMusic && musicSource.isPlaying)
         {
+            ApplySettings();
             return;
         }
 
         musicSource.Stop();
         musicSource.clip = newMusic;
+        ApplySettings();
         musicSource.Play();
     }
 
-   
-    public void PlayPlayerLaser()
+    // -------------------------
+    // SOUNDEFFEKTE
+    // -------------------------
+
+    public void PlayFootsteps()
     {
-        PlaySoundEffect(playerLaser, playerLaserVolume);
+        PlaySoundEffect(footstepsSound, footstepsVolume);
     }
 
-    public void PlayEnemyLaser()
+    public void PlayShot()
     {
-        PlaySoundEffect(enemyLaser, enemyLaserVolume);
-    }
-
-    public void PlayBossLaser()
-    {
-        PlaySoundEffect(bossLaser, bossLaserVolume);
+        PlaySoundEffect(shotSound, shotVolume);
     }
 
     private void PlaySoundEffect(AudioClip clip, float individualVolume)
     {
         if (clip == null || isMuted)
-        {
             return;
-        }
 
-        soundEffectSource.PlayOneShot(clip, individualVolume);
-    }
-    
-    public void SetMusicVolume(float volume)
-    {
-        musicVolume = Mathf.Clamp01(volume);
-        musicSource.volume = musicVolume;
-        SaveSettings();
+        soundEffectSource.PlayOneShot(
+            clip,
+            masterVolume * individualVolume
+        );
     }
 
-    public void SetSoundEffectVolume(float volume)
-    {
-        soundEffectVolume = Mathf.Clamp01(volume);
-        soundEffectSource.volume = soundEffectVolume;
-        SaveSettings();
-    }
+    // -------------------------
+    // EINSTELLUNGEN
+    // -------------------------
 
-    public void SetPlayerLaserVolume(float volume)
+    public void SetMasterVolume(float volume)
     {
-        playerLaserVolume = Mathf.Clamp01(volume);
-        SaveSettings();
-    }
-
-    public void SetEnemyLaserVolume(float volume)
-    {
-        enemyLaserVolume = Mathf.Clamp01(volume);
-        SaveSettings();
-    }
-
-    public void SetBossLaserVolume(float volume)
-    {
-        bossLaserVolume = Mathf.Clamp01(volume);
+        masterVolume = Mathf.Clamp01(volume);
+        ApplySettings();
         SaveSettings();
     }
 
@@ -170,8 +178,8 @@ public class SoundManager : MonoBehaviour
 
     private void ApplySettings()
     {
-        musicSource.volume = musicVolume;
-        soundEffectSource.volume = soundEffectVolume;
+        musicSource.volume =
+            masterVolume * currentMusicIndividualVolume;
 
         musicSource.mute = isMuted;
         soundEffectSource.mute = isMuted;
@@ -179,28 +187,22 @@ public class SoundManager : MonoBehaviour
 
     private void SaveSettings()
     {
-        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
-        PlayerPrefs.SetFloat("SoundEffectVolume", soundEffectVolume);
-        PlayerPrefs.SetFloat("PlayerLaserVolume", playerLaserVolume);
-        PlayerPrefs.SetFloat("EnemyLaserVolume", enemyLaserVolume);
-        PlayerPrefs.SetFloat("BossLaserVolume", bossLaserVolume);
+        PlayerPrefs.SetFloat("MasterVolume", masterVolume);
         PlayerPrefs.SetInt("SoundMuted", isMuted ? 1 : 0);
-
         PlayerPrefs.Save();
     }
 
     private void LoadSettings()
     {
-        musicVolume = PlayerPrefs.GetFloat("MusicVolume", musicVolume);
+        masterVolume =
+            PlayerPrefs.GetFloat("MasterVolume", masterVolume);
 
-        soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume", soundEffectVolume);
-
-        playerLaserVolume = PlayerPrefs.GetFloat("PlayerLaserVolume", playerLaserVolume);
-
-        enemyLaserVolume = PlayerPrefs.GetFloat("EnemyLaserVolume", enemyLaserVolume);
-
-        bossLaserVolume = PlayerPrefs.GetFloat("BossLaserVolume", bossLaserVolume);
-
-        isMuted = PlayerPrefs.GetInt("SoundMuted", 0) == 1;
+        isMuted =
+            PlayerPrefs.GetInt("SoundMuted", 0) == 1;
+    }
+    
+    public void StopMusic()
+    {
+        musicSource.Stop();
     }
 }

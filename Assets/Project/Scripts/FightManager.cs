@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FightManager : MonoBehaviour
 {
@@ -8,11 +9,14 @@ public class FightManager : MonoBehaviour
    [SerializeField] private GameObject crosshair;
    [SerializeField] private GameObject victoryPopup;
    [SerializeField] private GameObject losePanel;
+   [SerializeField] private Image timerCircle;
+   [SerializeField] private GameObject fightTimer;
    
    [Header("References")]
    [SerializeField] private GhostTimeTimer ghostTimeTimer;
    [SerializeField] private PlayFightSwitch playFightSwitch;
    [SerializeField] private LightRevolver lightRevolver;
+   [SerializeField] private GameObject playerInterface;
    
    
    [Header("Fight Settings")]
@@ -46,12 +50,14 @@ public class FightManager : MonoBehaviour
       ghost1.SetActive(false);
       ghost2.SetActive(false);
       ghost3.SetActive(false);
+      fightTimer.SetActive(false);
    }
    private void Update()
    {
-      if (fightTimerRunning)
+      if (fightTimerRunning) 
       {
          currentFightTime -= Time.deltaTime;
+         timerCircle.fillAmount = currentFightTime / maxFightTime;
          if (currentFightTime <= 0)
          {
             currentFightTime = 0;
@@ -64,6 +70,7 @@ public class FightManager : MonoBehaviour
    {
       currentClueID = clueID;
       ghostTimeTimer.FreezeGhostTime();
+      playerInterface.SetActive(false);
       attackPopup.SetActive(true);
       movement.enabled = false;
       thirdPersonCameraControl.enabled = false;
@@ -74,6 +81,8 @@ public class FightManager : MonoBehaviour
 
    public void StartAttack()
    {
+      Debug.Log("START BUTTON WURDE GEKLICKT");
+      SoundManager.Instance.PlayFightMusic();
       attackPopup.SetActive(false);
       crosshair.SetActive(true);
       movement.enabled = true;
@@ -81,6 +90,8 @@ public class FightManager : MonoBehaviour
       firstPersonCameraControl.enabled = true;
       playFightSwitch.SwitchToFightCamera();
       lightRevolver.EnableShooting();
+      fightTimer.SetActive(true);
+      timerCircle.fillAmount = 1f;
       currentFightTime = maxFightTime;
       fightTimerRunning = true;
       Cursor.lockState = CursorLockMode.None;
@@ -110,11 +121,14 @@ public class FightManager : MonoBehaviour
       Cursor.lockState = CursorLockMode.None;
       Cursor.visible = true;
       fightTimerRunning = false;
+      fightTimer.SetActive(false);
    }
 
    public void ExitFight()
    {
+      SoundManager.Instance.StopMusic();
       victoryPopup.SetActive(false);
+      playerInterface.SetActive(true);
       playFightSwitch.SwitchToPlayCamera();
 
       Cursor.lockState = CursorLockMode.Locked;
@@ -140,6 +154,7 @@ public class FightManager : MonoBehaviour
       losePanel.SetActive(true);
       lightRevolver.DisableShooting();
       crosshair.SetActive(false);
+      fightTimer.SetActive(false);
       Cursor.lockState = CursorLockMode.None;
       Cursor.visible = true;
       Invoke(nameof(RestartGame), 3f);

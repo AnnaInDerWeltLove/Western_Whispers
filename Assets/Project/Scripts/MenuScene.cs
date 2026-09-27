@@ -34,7 +34,6 @@ public class MenuScene : MonoBehaviour
     [SerializeField] private float darkLightIntensity = 0.15f;
     
     [Header("Sound")]
-    [SerializeField] private SoundManager soundManager;
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Toggle soundToggle;
 
@@ -51,6 +50,7 @@ public class MenuScene : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.PlayMenuMusic();
         // Ursprüngliche Werte speichern
         backgroundStartPosition = backgroundCamera.transform.position;
         backgroundStartRotation = backgroundCamera.transform.rotation;
@@ -70,8 +70,8 @@ public class MenuScene : MonoBehaviour
         fullscreenToggle.SetIsOnWithoutNotify(fullscreen);
         float volume = PlayerPrefs.GetFloat("MasterVolume", 1f);
 
-        volumeSlider.SetValueWithoutNotify(soundManager.MusicVolume);
-        soundToggle.SetIsOnWithoutNotify(!soundManager.IsMuted);
+        volumeSlider.SetValueWithoutNotify(SoundManager.Instance.MasterVolume);
+        soundToggle.SetIsOnWithoutNotify(!SoundManager.Instance.IsMuted);
         UpdateProgressMenu();
 
         blackScreen.SetActive(false);
@@ -330,8 +330,7 @@ public class MenuScene : MonoBehaviour
     }
     public void SetVolume(float volume)
     {
-        soundManager.SetMusicVolume(volume);
-        soundManager.SetSoundEffectVolume(volume);
+        SoundManager.Instance.SetMasterVolume(volume);
     }
     public void SetFullscreen(bool fullscreen)
     {
@@ -347,7 +346,7 @@ public class MenuScene : MonoBehaviour
     }
     public void SetSoundEnabled(bool soundEnabled)
     {
-        soundManager.SetMuted(!soundEnabled);
+        SoundManager.Instance.SetMuted(!soundEnabled);
     }
     private void UpdateProgressMenu()
     {

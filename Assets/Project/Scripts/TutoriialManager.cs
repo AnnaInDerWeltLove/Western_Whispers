@@ -1,89 +1,135 @@
 using TMPro;
 using UnityEngine;
+
 // KI Generiert
 public class TutorialManager : MonoBehaviour
 {
+    [Header("UI")]
     [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private TMP_Text tutorialText;
 
-    private bool movementDone;
-    private bool worldSwitchDone;
-    private bool interactionDone;
-    private bool fightDone;
-    
+    private int tutorialStep = 0;
+
+    private Vector3 lastMousePosition;
+
     private void Update()
     {
-        if (!movementDone)
+        switch (tutorialStep)
         {
-            if (Input.GetAxis("Horizontal") != 0 ||
-                Input.GetAxis("Vertical") != 0)
-            {
-                CompleteMovementTutorial();
-                ShowWorldSwitchTutorial();
-            }
-        }
-        else if (!worldSwitchDone)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                CompleteWorldSwitchTutorial();
-            }
+            // 1. Mit der Maus umsehen
+            case 0:
+                if (Input.mousePosition != lastMousePosition)
+                {
+                    ShowWASDTutorial();
+                    tutorialStep = 1;
+                }
+                break;
+
+
+            // 2. Mit WASD bewegen
+            case 1:
+                if (Input.GetAxis("Horizontal") != 0 ||
+                    Input.GetAxis("Vertical") != 0)
+                {
+                    ShowJumpTutorial();
+                    tutorialStep = 2;
+                }
+                break;
+
+
+            // 3. Springen
+            case 2:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    ShowPerspectiveTutorial();
+                    tutorialStep = 3;
+                }
+                break;
+
+
+            // 4. Perspektive wechseln
+            case 3:
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    ShowUITutorial();
+                    tutorialStep = 4;
+                }
+                break;
+
+
+            // 5. UI öffnen
+            case 4:
+                if (Input.GetMouseButtonDown(1))
+                {
+                    ShowHoverTutorial();
+                    tutorialStep = 5;
+                }
+                break;
         }
     }
 
+
+    // Wird vom IntroManager aufgerufen
     public void ShowMovementTutorial()
     {
-        if (movementDone) return;
-
+        if (PlayerPrefs.GetInt("TutorialCompleted", 0) == 1)
+        {
+            tutorialPanel.SetActive(false);
+            tutorialStep = 6;
+            return;
+        }
         tutorialPanel.SetActive(true);
-        tutorialText.text = "WASD – Bewegen";
+
+        tutorialText.text =
+            "Schau dich um, indem du die Maus bewegst.";
+
+        lastMousePosition = Input.mousePosition;
+        tutorialStep = 0;
     }
 
-    public void ShowWorldSwitchTutorial()
-    {
-        if (worldSwitchDone) return;
 
-        tutorialPanel.SetActive(true);
-        tutorialText.text = "Q – Zwischen den Welten wechseln";
+    private void ShowWASDTutorial()
+    {
+        tutorialText.text =
+            "Bewege dich mit den Tasten WASD.";
     }
 
-    public void ShowInteractionTutorial()
-    {
-        if (interactionDone) return;
 
-        tutorialPanel.SetActive(true);
-        tutorialText.text = "E – Interagieren";
+    private void ShowJumpTutorial()
+    {
+        tutorialText.text =
+            "Springe mit der Leertaste.";
     }
 
-    public void ShowFightTutorial()
-    {
-        if (fightDone) return;
 
-        tutorialPanel.SetActive(true);
-        tutorialText.text = "Linksklick – Lichtpistole abfeuern";
+    private void ShowPerspectiveTutorial()
+    {
+        tutorialText.text =
+            "Wechsle die Perspektive mit Q.";
     }
 
-    public void CompleteMovementTutorial()
+
+    private void ShowUITutorial()
     {
-        movementDone = true;
+        tutorialText.text =
+            "Drücke die rechte Maustaste,\num dein Menü zu öffnen.";
+    }
+
+
+    private void ShowHoverTutorial()
+    {
+        tutorialText.text =
+            "Fahre mit der Maus über die Symbole,\num herauszufinden, was sie tun.";
+        
+    }
+    
+    
+    public void CompleteTutorial()
+    {
         tutorialPanel.SetActive(false);
-    }
+        tutorialStep = 6;
 
-    public void CompleteWorldSwitchTutorial()
-    {
-        worldSwitchDone = true;
-        tutorialPanel.SetActive(false);
-    }
-
-    public void CompleteInteractionTutorial()
-    {
-        interactionDone = true;
-        tutorialPanel.SetActive(false);
-    }
-
-    public void CompleteFightTutorial()
-    {
-        fightDone = true;
-        tutorialPanel.SetActive(false);
+        PlayerPrefs.SetInt("TutorialCompleted", 1);
+        PlayerPrefs.Save();
     }
 }

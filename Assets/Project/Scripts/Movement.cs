@@ -13,6 +13,10 @@ public class Movement : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.6f;
     [SerializeField] private LayerMask groundLayer;
     
+    [Header("Schritte")]
+    [SerializeField] private float stepInterval = 0.5f;
+
+    private float stepTimer;
     
     private Rigidbody rb;
     private bool isGrounded;
@@ -46,6 +50,20 @@ public class Movement : MonoBehaviour
             Mathf.Abs(Input.GetAxis("Vertical")) > 0.01f;
 
         animator.SetBool("IsMoving", isMoving);
+        if (isMoving && isGrounded)
+        {
+            stepTimer -= Time.deltaTime;
+
+            if (stepTimer <= 0f)
+            {
+                SoundManager.Instance.PlayFootsteps();
+                stepTimer = stepInterval;
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+        }
     }
 
     void FixedUpdate()

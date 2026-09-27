@@ -1959,7 +1959,7 @@ MonoBehaviour:
   directionalLight: {fileID: 377946156}
   normalLightIntensity: 1
   darkLightIntensity: 0.15
-  soundManager: {fileID: 2064471942}
+  soundManager: {fileID: 0}
   volumeSlider: {fileID: 60681513}
   soundToggle: {fileID: 401077501}
   blackScreen: {fileID: 860186876}
@@ -4213,7 +4213,6 @@ Transform:
   - {fileID: 377946157}
   - {fileID: 513184275}
   - {fileID: 803035582}
-  - {fileID: 2064471941}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1218829657
@@ -7190,61 +7189,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058379862}
   m_CullTransparentMesh: 1
---- !u!1 &2064471940
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2064471941}
-  - component: {fileID: 2064471942}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2064471941
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2064471940}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1104757289}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2064471942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2064471940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98f257edf93e41a4ab6c2b49a787d2e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  introMusic: {fileID: 8300000, guid: 56249719930e82549b4e34b5a8935ed2, type: 3}
-  gameMusic: {fileID: 8300000, guid: eb5325b966d803640873bb6cb5b49bc3, type: 3}
-  bossMusic: {fileID: 8300000, guid: f8043fa922527014991bcef3715621d8, type: 3}
-  playerLaser: {fileID: 8300000, guid: 1d085eee9e9f399409bc33aafe79dee3, type: 3}
-  enemyLaser: {fileID: 8300000, guid: af7a9a458f0fdaf4a97c4ccb48bcd39c, type: 3}
-  bossLaser: {fileID: 8300000, guid: faff3e8108b4a954bb65cfd33dc8a081, type: 3}
-  musicVolume: 0.4
-  soundEffectVolume: 0.8
-  playerLaserVolume: 1
-  enemyLaserVolume: 1
-  bossLaserVolume: 1
 --- !u!1 &2079244271
 GameObject:
   m_ObjectHideFlags: 0

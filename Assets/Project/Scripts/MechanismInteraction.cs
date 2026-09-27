@@ -36,6 +36,9 @@ public class MechanismInteraction : MonoBehaviour
     [SerializeField] private WorldManager worldManager;
     [SerializeField] private UIInteractionController uiInteractionController;
     
+    [Header("Interaktionshinweis")]
+    [SerializeField] private GameObject interactionHint;
+    
     
     
     
@@ -50,19 +53,22 @@ public class MechanismInteraction : MonoBehaviour
         hintCutScenePlayer.loopPointReached += OnHintCutsceneFinished;
         storyCutScenePlayer.loopPointReached += OnStoryCutsceneFinished;
         rewardItemPanel.SetActive(false);
-       
+        rewardItemImage.gameObject.SetActive(false);
+        interactionHint.SetActive(false);
     }
 
     private void Update()
     {
-        if (playerInside && !mechanismActivated && !sequenceRunning && Input.GetKeyDown(KeyCode.E))
+        if (playerInside && !mechanismActivated && !sequenceRunning && Input.GetMouseButtonDown(0))
         {
+            interactionHint.SetActive(true);
            StartMechanismSequence();
 
         }
     }
     public void PlayHintCutscene()
     {
+        SoundManager.Instance.StopMusic();
         DisablePlayerControls();
         playerInterface.SetActive(false);
 
@@ -72,6 +78,7 @@ public class MechanismInteraction : MonoBehaviour
     }
     private void StartMechanismSequence()
     {
+        SoundManager.Instance.StopMusic();
         movement.enabled = false;
         mechanismActivated = true;
         sequenceRunning = true;
@@ -85,26 +92,23 @@ public class MechanismInteraction : MonoBehaviour
         hintCutScenePanel.SetActive(false);
         playerInterface.SetActive(true);
         EnablePlayerControls();
-        
+        SoundManager.Instance.PlaySpiritWorldMusic();
         ghostTimeTimer.UnfreezeGhostTime();
       
     }
     private void ShowItemInInventory()
     {
         inventory.AddItem(rewardItemSprite);
+        playerInterface.SetActive(true);
         inventory.OpenInventory();
-
+        
+        rewardItemImage.gameObject.SetActive(false);
         rewardItemPanel.SetActive(false);
+        
 
         Invoke(nameof(FinishMechanismSequence), 2f);
     }
-    private void StartStoryCutscene()
-    {
-        inventory.CloseInventory();
-        storyCutScenePanel.SetActive(true);
-        storyCutScenePlayer.clip = storyVideo;
-        storyCutScenePlayer.Play();
-    }
+    
 
     private void OnStoryCutsceneFinished(VideoPlayer vp)
     {
@@ -116,6 +120,7 @@ public class MechanismInteraction : MonoBehaviour
         storyCutScenePanel.SetActive(false);
 
         rewardItemImage.sprite = rewardItemSprite;
+        rewardItemImage.gameObject.SetActive(true);
         rewardItemPanel.SetActive(true);
 
         Invoke(nameof(ShowItemInInventory), 2f);
@@ -123,11 +128,12 @@ public class MechanismInteraction : MonoBehaviour
     
     private void FinishMechanismSequence()
     {
+        interactionHint.SetActive(false);
+        playerInside = false;
         inventory.CloseInventory();
-        inventory.AddItem(rewardItemSprite);
         rewardItemPanel.SetActive(false);
         EnablePlayerControls();
-        
+        SoundManager.Instance.PlayNormalWorldMusic();
 
         movement.enabled = true;
         sequenceRunning = false;
@@ -155,6 +161,10 @@ public class MechanismInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = true;
+            if (!mechanismActivated && !sequenceRunning)
+            {
+                interactionHint.SetActive(true);
+            }
         }
     }
 
@@ -163,6 +173,7 @@ public class MechanismInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = false;
+            interactionHint.SetActive(false);
         }
     }
     
