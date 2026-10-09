@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#253537" />
+		<meta
+			name="description"
+			content="Entdecke das Spiel Luzz Biteyear: Legend of Redstone und erkunde die Geisterstadt Redstone."
+		/>
+
+		<title>Das Spiel – Luzz Biteyear: Legend of Redstone</title>
+
+		<link
+			rel="icon"
+			href="../medien/grafiken/Bildmarke farbig.svg"
+			type="image/svg"
+		/>
+		<link rel="stylesheet" href="../gestaltung/grundlayout.css" />
+
+		<script src="../funktion/redstone.js" defer></script>
+	</head>
+
+	<body id="Spielseite" class="spielseite">
+		<header id="Kopfbereich">
+			<a href="start.html" aria-label="Zur Startseite">
+				<img
+					src="../medien/grafiken/Bildmarke farbig.svg" alt="Luzz Biteyear" />
+			</a>
+
+			<button
+				id="Menueicon"
+				class="Icon"
+				type="button"
+				aria-label="Navigation anzeigen"
+			>
+				&#xf20d;
+			</button>
+
+			<nav id="Navleiste" aria-label="Hauptnavigation">
+				<a href="start.html">Start</a>
+				<a href="charaktere.html">Luzz &amp; Co</a>
+				<a href="spiel.html" aria-current="page">Das Spiel</a>
+				<a href="galerie.html">Galerie</a>
+				<a href="merchandise.html">Merchandise</a>
+			</nav>
+		</header>
+
+		<main id="Hauptinhalt">
+			<a class="zurueck" href="start.html">
+				&#8592; Zurück zur Startseite
+			</a>
+
+			<header class="seitentafel">
+				<p class="kapitelmarke">3D-Rätselabenteuer ab 12 Jahren</p>
+				<h1>Das Spiel</h1>
+			</header>
+
+			<section class="spielinfos">
+				<section
+					class="spielvorstellung"
+					aria-label="Willkommen in Redstone"
+				>
+					<img
+						src="../medien/grafiken/pergament.png"
+						alt="Willkommen in Redstone. Als Luzz hört, dass seine Heimat Redstone zu einer Geisterstadt geworden ist, kehrt er zurück. Die Bewohner sind durch einen Fluch zwischen der wirklichen Welt und der Schattenwelt gefangen. Luzz folgt ihren Spuren und sucht nach einem Weg, die Stadt zu retten."
+					/>
+				</section>
+
+				<section
+					class="spielidee"
+					aria-labelledby="SpielideeTitel"
+				>
+					<h2 id="SpielideeTitel">Die Spielidee</h2>
+
+					<p>
+						Erkunde die Gebäude, löse Rätsel und wechsle zwischen den Welten.
+						In der Schattenwelt wird Luzz’ Revolver zur Lichtwaffe gegen
+						feindliche Gestalten. Wiederbelebung und weitere Mechaniken sind
+						für die Spielentwicklung vorgesehen.
+					</p>
+				</section>
+			</section>
+
+			<section class="redstone-entdecken">
+				<h2>Entdecke Redstone</h2>
+
+				<p>
+					Klicke auf einen der Buttons und erfahre mehr über Redstone.
+				</p>
+
+				<section class="redstone-karte">
+					<img
+						src="../medien/bilder/spiel/map_mit_haeuser.png"
+						alt="Karte von Redstone mit verschiedenen Gebäuden"
+					/>
+
+					<button
+						type="button"
+						class="hotspot post"
+						id="post"
+					>
+						Post
+					</button>
+
+					<button
+						type="button"
+						class="hotspot sheriff"
+						id="sheriff"
+					>
+						Sheriff
+					</button>
+
+					<button
+						type="button"
+						class="hotspot saloon"
+						id="saloon"
+					>
+						Saloon
+					</button>
+
+					<article
+						class="funfact"
+						id="funfact"
+						hidden
+					>
+						<h3></h3>
+						<p></p>
+					</article>
+				</section>
+			</section>
+		</main>
+
+		<footer id="Fussbereich">
+			<p>&copy; 2026 Luzz Biteyear</p>
+			<a href="impressum.html">Impressum</a>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#171b1c" />
+		<meta
+			name="description"
+			content="Interaktive Einleitung zu Luzz Biteyear: Legend of Redstone."
+		/>
+
+		<title>Luzz Biteyear: Legend of Redstone</title>
+
+		<link
+			rel="icon"
+			href="../medien/grafiken/Wortbildmarke farbig.png"
+			type="image/png"
+		/>
+		<link
+			rel="preload"
+			as="image"
+			href="../medien/bilder/landingpage/keyframe-01.png"
+			type="image/png"
+			fetchpriority="high"
+		/>
+		<link rel="stylesheet" href="../gestaltung/grundlayout.css" />
+		<script src="../funktion/landingpage.js" defer></script>
+	</head>
+
+	<body id="Landingpage" class="landingpage">
+		<a id="IntroUeberspringen" class="skip-intro" href="start.html">
+			Intro überspringen
+		</a>
+
+		<main id="Landing">
+			<section
+				id="ScrollStory"
+				class="scroll-story"
+				aria-labelledby="IntroTitel"
+				aria-describedby="IntroBeschreibung"
+			>
+				<h1 id="IntroTitel" class="visually-hidden">
+					Luzz Biteyear: Legend of Redstone
+				</h1>
+
+				<p id="IntroBeschreibung" class="visually-hidden">
+					Luzz feuert in Redstone eine Lichtkugel ab. Die Kugel fliegt
+					durch die Stadt, trifft einen Schattengeist und enthüllt das Logo.
+				</p>
+
+				<section id="ScrollStage" class="scroll-stage" aria-label="Animierte Spielszene">
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-01.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-01.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+							fetchpriority="high"
+						/>
+					</figure>
+
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-02.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-02.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+						/>
+					</figure>
+
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-03.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-03.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+						/>
+					</figure>
+
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-04.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-04.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+						/>
+					</figure>
+
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-05.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-05.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+						/>
+					</figure>
+
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-06.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-06.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+						/>
+					</figure>
+
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-07.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-07.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+						/>
+					</figure>
+
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-08.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-08.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+						/>
+					</figure>
+
+					<figure
+						class="story-frame"
+						style="--frame-image: url('../medien/bilder/landingpage/keyframe-09.png')"
+						aria-hidden="true"
+					>
+						<img
+							src="../medien/bilder/landingpage/keyframe-09.png"
+							width="1672"
+							height="941"
+							alt=""
+							draggable="false"
+						/>
+					</figure>
+
+					<aside id="ScrollHinweis" class="scroll-hint" aria-hidden="true">
+						<strong class="scroll-hint__desktop">Scrollen</strong>
+						<strong class="scroll-hint__mobile">Wischen</strong>
+					</aside>
+
+					<progress
+						id="IntroFortschritt"
+						class="intro-progress"
+						max="100"
+						value="0"
+						aria-label="Fortschritt der Einleitung"
+					></progress>
+
+					<a
+						id="LandingLogo"
+						class="landing-logo"
+						href="start.html"
+						tabindex="-1"
+						aria-hidden="true"
+						aria-label="Redstone betreten"
+					>
+						<strong>Redstone betreten</strong>
+					</a>
+				</section>
+			</section>
+		</main>
+
+		<noscript>
+			<p>
+				JavaScript ist deaktiviert.
+				<a href="start.html">Direkt zur Startseite</a>
+			</p>
+		</noscript>
+	</body>
+</html>

@@ -1,0 +1,2224 @@
+/* 
+Schriften und Icons Lisa
+*/
+
+@font-face {
+	font-family: "Marcellus SC";
+	src: url("MarcellusSC-Regular.ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Source Sans 3";
+	src: url("SourceSans3-Regular.ttf");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Source Sans 3";
+	src: url("SourceSans3-SemiBold.ttf");
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: Icons;
+	src: url("ionicons.ttf");
+}
+
+.Icon {
+	font-family: Icons;
+}
+
+
+/*
+Farben Cosmin
+*/
+
+:root {
+	--dunkel: #253537;
+	--tuerkis: #29ABB5;
+	--beige: #F2E0B1;
+	--weinrot: #7C3639;
+	--weiss: #ffffff;
+	--schwarz: #000000;
+}
+
+
+/* 
+Grundeinstellungen Lisa
+*/
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: "Source Sans 3", Arial, sans-serif;
+	font-size: 16px;
+}
+
+body {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
+	margin: 0;
+	background-color: var(--tuerkis);
+	color: var(--dunkel);
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+h1,
+h2,
+h3 {
+	font-family: "Marcellus SC", Georgia, serif;
+}
+
+h1 {
+	margin-top: 0;
+}
+
+a {
+	color: inherit;
+}
+
+
+/*
+Header Lisa
+*/
+
+body > header {
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: center;
+	align-items: center;
+	gap: 0;
+	padding: 0.8rem 2rem;
+	background-color: var(--dunkel);
+}
+
+body > header > a {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    display: block;
+    margin-right: 1.5rem;
+}
+
+body > header > a img {
+	display: block;
+	width: 210px;
+	height: auto;
+}
+
+
+/*
+Navigation Lisa
+*/
+
+#Navleiste {
+	grid-column: 2;
+	grid-row: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1.8rem;
+}
+
+#Navleiste a {
+    position: relative;
+    display: block;
+    padding: 0.4rem 0.7rem;
+    color: var(--beige);
+    font-weight: 600;
+    text-decoration: none;
+    background-color: transparent;
+    transition: color 0.2s ease,
+                transform 0.2s ease;
+}
+
+#Navleiste a::before,
+#Navleiste a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0.45rem;
+    border-left: 1px solid var(--beige);
+    border-right: 1px solid var(--beige);
+}
+
+#Navleiste a::before {
+    top: 0;
+    border-top: 1px solid var(--beige);
+}
+
+#Navleiste a::after {
+    bottom: 0;
+    border-bottom: 1px solid var(--beige);
+}
+
+#Navleiste a:hover,
+#Navleiste a:focus {
+    color: var(--tuerkis);
+    transform: translateY(-2px);
+}
+
+#Navleiste a:hover::before,
+#Navleiste a:hover::after,
+#Navleiste a:focus::before,
+#Navleiste a:focus::after {
+    border-color: var(--tuerkis);
+}
+
+#Navleiste a[aria-current="page"] {
+    color: var(--tuerkis);
+}
+
+#Navleiste a[aria-current="page"]::before,
+#Navleiste a[aria-current="page"]::after {
+    border-color: var(--tuerkis);
+}
+
+#Menueicon {
+	display: none;
+	color: var(--beige);
+	font-size: 2rem;
+	text-align: center;
+	background: none;
+	border: none;
+	padding: 0.3rem;
+	cursor: pointer;
+}
+
+
+/*
+Main Lisa
+*/
+
+body > main {
+	width: 100%;
+	padding: 2rem;
+	background-color: var(--tuerkis);
+}
+
+body > main > h1 {
+	color: var(--dunkel);
+}
+
+
+/*
+Zurück-Link Lisa
+*/
+
+.zurueck {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding: 0.55rem 1rem;
+    background-color: var(--weinrot);
+    color: var(--beige);
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.zurueck::before,
+.zurueck::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0.45rem;
+    box-sizing: border-box;
+    border-left: 2px solid var(--beige);
+    border-right: 2px solid var(--beige);
+}
+
+.zurueck::before {
+    top: 0;
+    border-top: 2px solid var(--beige);
+}
+
+.zurueck::after {
+    bottom: 0;
+    border-bottom: 2px solid var(--beige);
+}
+
+.zurueck:hover,
+.zurueck:focus {
+    background-color: var(--dunkel);
+    color: var(--tuerkis);
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.zurueck:hover::before,
+.zurueck:hover::after,
+.zurueck:focus::before,
+.zurueck:focus::after {
+    border-color: var(--tuerkis);
+}
+
+
+/*
+Footer Lisa
+*/
+
+body > footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+	padding: 0rem 2rem;
+	background-color: var(--beige);
+}
+
+body > footer p {
+	margin: 0;
+}
+
+body > footer a {
+	font-weight: 600;
+	text-decoration: none;
+}
+
+body > footer a:hover,
+body > footer a:focus {
+	text-decoration: underline;
+}
+
+/*
+Landingpage Cosmin
+*/
+
+body.landingpage {
+	display: block;
+	min-height: 100%;
+	background-color: #171b1c;
+	color: var(--beige);
+	overflow-x: hidden;
+}
+
+body.landingpage > main {
+	width: 100%;
+	padding: 0;
+	background-color: #171b1c;
+}
+
+.skip-intro {
+	position: fixed;
+	z-index: 20;
+	top: max(1rem, env(safe-area-inset-top));
+	right: max(1rem, env(safe-area-inset-right));
+	padding: 0.6rem 0.9rem;
+	border: 1px solid rgba(242, 224, 177, 0.7);
+	background-color: rgba(37, 53, 55, 0.82);
+	color: var(--beige);
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+	backdrop-filter: blur(8px);
+}
+
+.skip-intro:hover,
+.skip-intro:focus-visible {
+	background-color: var(--weinrot);
+	color: var(--weiss);
+	outline: 2px solid var(--beige);
+	outline-offset: 3px;
+}
+
+.scroll-story {
+	--flash-opacity: 0;
+	position: relative;
+	height: 800svh;
+	min-height: 800vh;
+	background-color: #171b1c;
+}
+
+.scroll-stage {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	height: 100svh;
+	overflow: hidden;
+	isolation: isolate;
+	background-color: #171b1c;
+}
+
+.story-frame,
+.story-frame::before,
+.story-frame::after {
+	position: absolute;
+	inset: 0;
+}
+
+.story-frame {
+	--frame-scale: 1.025;
+	--frame-x: 0px;
+	--frame-y: 0px;
+	z-index: 1;
+	margin: 0;
+	overflow: hidden;
+	opacity: 0;
+	transform: translate3d(var(--frame-x), var(--frame-y), 0)
+		scale(var(--frame-scale));
+	transform-origin: center;
+	will-change: opacity, transform;
+	pointer-events: none;
+}
+
+.story-frame:first-child {
+	opacity: 1;
+}
+
+.story-frame::before {
+	content: "";
+	inset: -2rem;
+	background-image: var(--frame-image);
+	background-position: center;
+	background-size: cover;
+	filter: blur(18px) brightness(0.52) saturate(0.8);
+	transform: scale(1.08);
+}
+
+.story-frame::after {
+	content: "";
+	background:
+		linear-gradient(to bottom, rgba(16, 18, 18, 0.08), transparent 40%),
+		radial-gradient(circle at center, transparent 50%, rgba(9, 11, 11, 0.34) 100%);
+}
+
+.story-frame img {
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: 100%;
+	max-width: none;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+}
+
+.scroll-stage::before {
+	content: "";
+	position: absolute;
+	z-index: 3;
+	inset: 0;
+	background-color: #fff7dc;
+	opacity: var(--flash-opacity);
+	pointer-events: none;
+	mix-blend-mode: screen;
+}
+
+.scroll-hint {
+	position: absolute;
+	z-index: 5;
+	left: 50%;
+	bottom: max(2rem, calc(env(safe-area-inset-bottom) + 1rem));
+	display: grid;
+	justify-items: center;
+	gap: 0.45rem;
+	min-width: 7rem;
+	padding: 0.55rem 0.9rem;
+	transform: translateX(-50%);
+	border: 1px solid rgba(242, 224, 177, 0.72);
+	background-color: rgba(37, 53, 55, 0.76);
+	color: var(--beige);
+	font-family: "Marcellus SC", Georgia, serif;
+	font-size: 0.82rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	transition: opacity 180ms linear;
+	pointer-events: none;
+	backdrop-filter: blur(8px);
+}
+
+.scroll-hint__mobile {
+	display: none;
+}
+
+.scroll-hint::after {
+	content: "";
+	width: 0.7rem;
+	height: 0.7rem;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg);
+	animation: scrollhinweis 1.15s ease-in-out infinite;
+}
+
+@keyframes scrollhinweis {
+	0%, 100% {
+		transform: translateY(-2px) rotate(45deg);
+	}
+
+	50% {
+		transform: translateY(5px) rotate(45deg);
+	}
+}
+
+.intro-progress {
+	position: absolute;
+	z-index: 5;
+	left: max(1rem, env(safe-area-inset-left));
+	right: max(1rem, env(safe-area-inset-right));
+	bottom: max(0.75rem, env(safe-area-inset-bottom));
+	display: block;
+	width: calc(100% - max(2rem, env(safe-area-inset-left) + env(safe-area-inset-right)));
+	height: 3px;
+	border: 0;
+	border-radius: 0;
+	appearance: none;
+	-webkit-appearance: none;
+	background-color: transparent;
+	pointer-events: none;
+}
+
+.intro-progress::-webkit-progress-bar {
+	background-color: rgba(242, 224, 177, 0.22);
+}
+
+.intro-progress::-webkit-progress-value {
+	background-color: var(--beige);
+}
+
+.intro-progress::-moz-progress-bar {
+	background-color: var(--beige);
+}
+
+.landing-logo {
+	position: absolute;
+	z-index: 8;
+	left: 50%;
+	top: 50%;
+	display: grid;
+	justify-items: center;
+	gap: 0.65rem;
+	width: min(31vw, 31rem);
+	min-width: 15rem;
+	padding: 1.2rem;
+	transform: translate(-50%, -46%) scale(0.9);
+	opacity: 0;
+	color: var(--beige);
+	text-decoration: none;
+	pointer-events: none;
+	will-change: opacity, transform;
+}
+
+.landing-logo::before {
+	display: none;
+}
+
+.landing-logo.is-active {
+	pointer-events: auto;
+}
+
+.landing-logo:hover,
+.landing-logo:focus-visible {
+	filter: drop-shadow(0 0 1.1rem rgba(242, 224, 177, 0.48));
+	outline: none;
+}
+
+.landing-logo img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.landing-logo strong {
+	padding: 0.35rem 0.65rem;
+	background-color: rgba(37, 53, 55, 0.82);
+	font-size: 0.86rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+@media screen and (min-aspect-ratio: 4 / 3) {
+	.story-frame::before {
+		display: none;
+	}
+
+	.story-frame img {
+		object-fit: cover;
+	}
+}
+
+@media screen and (width < 700px) {
+	.scroll-story {
+		height: 680svh;
+		min-height: 680vh;
+	}
+
+	.skip-intro {
+		font-size: 0.82rem;
+	}
+
+	.scroll-hint__desktop {
+		display: none;
+	}
+
+	.scroll-hint__mobile {
+		display: inline;
+	}
+
+	.landing-logo {
+		width: min(68vw, 24rem);
+		min-width: 0;
+	}
+}
+
+
+/*
+Start Lisa
+*/
+
+/* Hero-Bereich */
+
+.hero {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	gap: 2rem;
+	min-height: 70vh;
+	padding: 3rem;
+	overflow: hidden;
+}
+
+
+/* Spieltitel und Teaser */
+
+.hero h1 {
+	margin: 0 0 1rem 0;
+	font-size: 3rem;
+	color: #253537;
+}
+
+.hero h1 strong {
+	color: #7C3639;
+	font-weight: inherit;
+}
+
+.hero p {
+	margin: 0 0 2rem 0;
+	font-size: 1.2rem;
+	font-weight: inherit;
+	line-height: 1.6;
+	color: var(--weinrot);
+}
+
+.herotext {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.startseite > main {
+	position: relative;
+	padding-bottom: 0;
+	overflow: hidden;
+}
+
+
+/* Play-Button */
+
+.playbutton {
+    position: relative;
+    display: inline-block;
+    padding: 1.05rem 2.8rem;
+    background: linear-gradient(
+		135deg,
+		#914449 0%,
+		var(--weinrot) 55%,
+		#682b2f 100%
+	);
+    color: var(--beige);
+	font-family: "Marcellus SC", serif;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.3rem;
+	letter-spacing: 0.04em;
+    border: none;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.playbutton::before,
+.playbutton::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0.65rem;
+    box-sizing: border-box;
+    border-left: 3px solid var(--dunkel);
+	border-right: 3px solid var(--dunkel);
+}
+
+.playbutton::before {
+    top: 0;
+    border-top: 3px solid var(--dunkel);
+}
+
+.playbutton::after {
+    bottom: 0;
+    border-bottom: 3px solid var(--dunkel);
+}
+
+.playbutton:hover,
+.playbutton:focus {
+    background-color: var(--dunkel);
+    color: var(--tuerkis);
+    text-decoration: none;
+    transform: translateY(-3px);
+}
+
+.playbutton:hover::before,
+.playbutton:hover::after,
+.playbutton:focus::before,
+.playbutton:focus::after {
+    border-color: var(--tuerkis);
+}
+
+
+/* Keyvisual */
+
+.keyvisual {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	text-align: center;
+}
+
+.keyvisual img {
+	display: block;
+	width: 100%;
+	height: auto;
+	-webkit-mask-image: radial-gradient(
+        ellipse at center,
+        black 68%,
+        transparent 100%
+    );
+    mask-image: radial-gradient(
+        ellipse at center,
+        black 68%,
+        transparent 100%
+    );
+}
+
+
+/* CSS-Nebel */
+
+.startseite > main::after {
+	content: "";
+	position: absolute;
+	left: -5vw;
+	bottom: 0;
+	width: 110vw;
+	height: 85%;
+
+	background:
+		radial-gradient(
+			ellipse at center bottom,
+			rgba(255, 255, 255, 0.42) 0%,
+			rgba(255, 255, 255, 0.24) 35%,
+			rgba(255, 255, 255, 0) 78%
+		);
+
+	filter: blur(22px);
+	pointer-events: none;
+
+	animation: nebel 10s ease-in-out infinite alternate;
+}
+
+@keyframes nebel {
+	from {
+		transform: translateY(12%);
+	}
+
+	to {
+		transform: translateY(-45%);
+	}
+}
+
+
+/* Trailer-Bereich */
+
+.trailer {
+	position: relative;
+	padding: 3rem 3rem 0 3rem;
+	text-align: center;
+	overflow: hidden;
+}
+
+.trailer h2 {
+	margin-top: 0;
+}
+
+.trailer video {
+	display: block;
+	width: 100%;
+	max-width: 1000px;
+	height: auto;
+	margin: 2rem auto 0 auto;
+	aspect-ratio: 16 / 9;
+}
+
+.trailer-platzhalter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-width: 1000px;
+	aspect-ratio: 16 / 9;
+	margin: 2rem auto 3rem auto;
+	background-color: var(--dunkel);
+	border: 4px solid var(--beige);
+	outline: 3px solid var(--weinrot);
+	outline-offset: 3px;
+}
+
+.trailer-platzhalter p {
+	margin: 0;
+	color: var(--beige);
+	font-family: "Marcellus SC", serif;
+	font-size: 1.5rem;
+}
+
+
+/*
+Luzz & Co Cosmin
+*/
+
+.charakterseite > main {
+	padding-bottom: clamp(3rem, 7vw, 6rem);
+	background-color: var(--tuerkis);
+}
+
+.charakter-intro,
+.charakterliste,
+.geheimnis {
+	width: min(100%, 1180px);
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.charakter-intro {
+	position: relative;
+	margin-bottom: clamp(2rem, 5vw, 4rem);
+	padding: clamp(1.5rem, 4vw, 3.5rem);
+	border: 4px solid var(--dunkel);
+	background-color: var(--beige);
+	box-shadow: 10px 10px 0 rgba(37, 53, 55, 0.28);
+}
+
+.charakter-intro::after {
+	content: "";
+	position: absolute;
+	right: 1rem;
+	bottom: 1rem;
+	left: 1rem;
+	height: 5px;
+	background-color: var(--weinrot);
+}
+
+.kapitelmarke {
+	margin: 0 0 0.55rem;
+	color: var(--weinrot);
+	font-size: 0.88rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.charakter-intro h1 {
+	margin-bottom: 0.75rem;
+	color: var(--dunkel);
+	font-size: clamp(2.5rem, 7vw, 5rem);
+	line-height: 0.95;
+}
+
+.charakter-einleitung {
+	max-width: 760px;
+	margin: 0;
+	font-size: clamp(1.05rem, 2vw, 1.3rem);
+	line-height: 1.65;
+}
+
+.charakterliste {
+	display: grid;
+	gap: clamp(2rem, 6vw, 5rem);
+}
+
+.charakterkarte {
+	display: grid;
+	grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+	grid-template-areas: "bild text";
+	border: 4px solid var(--dunkel);
+	background-color: var(--beige);
+	box-shadow: 10px 10px 0 rgba(37, 53, 55, 0.28);
+}
+
+.charakterkarte--lucy {
+	grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+	grid-template-areas: "text bild";
+}
+
+.charakterbild {
+	position: relative;
+	grid-area: bild;
+	display: grid;
+	place-items: end center;
+	min-height: 570px;
+	margin: 0;
+	padding: 2rem 2rem 0;
+	background-color: var(--dunkel);
+	overflow: hidden;
+}
+
+.charakterkarte--luzz .charakterbild {
+	border-right: 4px solid var(--dunkel);
+}
+
+.charakterkarte--lucy .charakterbild {
+	border-left: 4px solid var(--dunkel);
+}
+
+.charakterbild::before {
+	content: "";
+	position: absolute;
+	width: 70%;
+	aspect-ratio: 1;
+	border: 5px solid var(--tuerkis);
+	transform: rotate(45deg);
+	opacity: 0.45;
+}
+
+.charakterbild img {
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: auto;
+	max-width: 100%;
+	height: min(540px, 47vw);
+	object-fit: contain;
+	object-position: center bottom;
+	filter: drop-shadow(8px 8px 0 rgba(0, 0, 0, 0.22));
+}
+
+.charakterbild figcaption {
+	position: absolute;
+	z-index: 2;
+	right: 1rem;
+	bottom: 1rem;
+	padding: 0.45rem 0.75rem;
+	border: 2px solid var(--beige);
+	background-color: var(--weinrot);
+	color: var(--weiss);
+	font-family: "Marcellus SC", Georgia, serif;
+	font-size: 0.9rem;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+.charaktertext {
+	grid-area: text;
+	align-self: center;
+	padding: clamp(1.6rem, 4.5vw, 4rem);
+}
+
+.charakterrolle {
+	display: inline-block;
+	margin: 0 0 0.8rem;
+	padding: 0.35rem 0.65rem;
+	border-left: 5px solid var(--weinrot);
+	background-color: var(--dunkel);
+	color: var(--beige);
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+}
+
+.charaktertext h2 {
+	margin: 0 0 1.1rem;
+	color: var(--weinrot);
+	font-size: clamp(2rem, 5vw, 3.6rem);
+	line-height: 1;
+}
+
+.charaktertext > p:not(.charakterrolle) {
+	margin: 0 0 1rem;
+	font-size: 1.05rem;
+	line-height: 1.7;
+}
+
+.charakterdaten {
+	display: grid;
+	grid-template-columns: minmax(7.5rem, max-content) minmax(0, 1fr);
+	margin: 1.7rem 0 0;
+	border-top: 3px solid var(--dunkel);
+	border-bottom: 3px solid var(--dunkel);
+}
+
+.charakterdaten dt,
+.charakterdaten dd {
+	margin: 0;
+	padding: 0.7rem 0;
+	border-bottom: 1px solid rgba(37, 53, 55, 0.25);
+}
+
+.charakterdaten dt:nth-last-of-type(1),
+.charakterdaten dd:last-child {
+	border-bottom: 0;
+}
+
+.charakterdaten dt {
+	padding-right: 1rem;
+	color: var(--weinrot);
+	font-family: "Marcellus SC", Georgia, serif;
+	font-weight: 600;
+}
+
+.geheimnis {
+	margin-top: clamp(2.5rem, 7vw, 5rem);
+	padding: clamp(1.5rem, 4vw, 3rem);
+	border: 4px solid var(--beige);
+	outline: 4px solid var(--weinrot);
+	outline-offset: -12px;
+	background-color: var(--dunkel);
+	color: var(--beige);
+}
+
+.geheimnis header {
+	margin-bottom: 1.25rem;
+}
+
+.geheimnis .kapitelmarke {
+	color: var(--tuerkis);
+}
+
+.geheimnis h2 {
+	margin: 0;
+	font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.geheimnis details {
+	border-top: 2px solid var(--tuerkis);
+	border-bottom: 2px solid var(--tuerkis);
+}
+
+.geheimnis summary {
+	padding: 1rem 0;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.geheimnis summary::marker {
+	color: var(--tuerkis);
+}
+
+.geheimnis summary:hover,
+.geheimnis summary:focus-visible {
+	color: var(--tuerkis);
+}
+
+.geheimnis summary:focus-visible {
+	outline: 2px solid var(--tuerkis);
+	outline-offset: 4px;
+}
+
+.geheimnis details p {
+	max-width: 850px;
+	margin: 0;
+	padding: 0 0 1.25rem 1.15rem;
+	border-left: 4px solid var(--weinrot);
+	line-height: 1.7;
+}
+
+
+/*
+Das Spiel Lisa
+*/
+
+.seitentafel {
+	width: 45%;
+	margin: 2rem 0 4rem 0;
+	padding: 1.5rem 2rem;
+	background-color: var(--dunkel);
+	border: 4px solid var(--beige);
+	outline: 3px solid var(--weinrot);
+	outline-offset: -10px;
+}
+
+.seitentafel p {
+	margin: 0 0 0.5rem 0;
+	color: var(--tuerkis);
+	font-weight: 600;
+	letter-spacing: 0.15rem;
+}
+
+.seitentafel h1 {
+	margin: 0;
+	color: var(--beige);
+	font-size: 2.5rem;
+}
+
+.spielvorstellung,
+.spielidee,
+.redstone-entdecken {
+	margin-bottom: 4rem;
+}
+
+.spielinfos {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	gap: 3rem;
+	max-width: 1200px;
+	margin: 3rem auto 5rem auto;
+}
+
+.spielvorstellung {
+	margin: 0;
+	padding: 0;
+}
+
+.pergament {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.spielidee h2,
+.redstone-entdecken h2 {
+    margin-bottom: 1rem;
+    color: var(--weinrot);
+    font-size: 2rem;
+}
+
+.spielidee {
+	background-image: url("../medien/grafiken/karte.png");
+	background-repeat: no-repeat;
+	background-position: center 12rem;
+	background-size: 50% auto;
+	min-height: 320px;
+	padding-bottom: 12rem;
+	padding-top: 5rem;
+}
+
+.spielidee h2 {
+    text-align: center;
+}
+
+.redstone-entdecken > h2,
+.redstone-entdecken > p {
+	text-align: center;
+}
+
+.redstone-entdecken > h2 {
+	font-size: 2rem;
+	margin-bottom: 0.5rem;
+}
+
+.redstone-entdecken {
+    background-color: var(--beige);
+	padding: 1.5rem 2.5rem 2.5rem;
+	max-width: 1100px;
+	margin: -4rem auto 4rem auto;
+	border: 3px solid var(--dunkel);
+	border-radius: 0.5rem;
+	box-shadow: 0.4rem 0.4rem 0 rgba(37, 53, 55, 0.25);
+}
+
+/* Interaktive Redstone-Karte Lisa */ 
+
+.redstone-karte {
+	position: relative;
+	width: 100%;
+	max-width: 1000px;
+	margin: 1.5rem auto 0 auto;
+}
+
+.redstone-karte > img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.hotspot {
+	position: absolute;
+	padding: 0.6rem 1rem;
+
+	background-color: var(--dunkel);
+	color: var(--beige);
+
+	border: 3px solid var(--dunkel);
+	border-radius: 4px;
+
+	font-family: "Marcellus SC", serif;
+	font-size: 1rem;
+	font-weight: 600;
+
+	cursor: pointer;
+
+	box-shadow: 3px 4px 0 rgba(70, 40, 25, 0.45);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus {
+	background-color: var(--weinrot);
+	color: var(--beige);
+	transform: translateY(-3px);
+	box-shadow: 2px 6px 0 rgba(70, 40, 25, 0.35);
+}
+
+.funfact {
+	position: absolute;
+	z-index: 3;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: min(600px, 80%);
+	padding: 2rem;
+
+	background-color: var(--dunkel);
+	color: var(--beige);
+	border: 3px solid var(--weinrot);
+	outline: 3px solid var(--beige);
+	outline-offset: -8px;
+}
+
+.funfact h3 {
+	margin: 0 0 0.8rem 0;
+	font-family: "Marcellus SC", serif;
+	font-size: 1.5rem;
+	color: var(--beige);
+}
+
+.funfact p {
+	margin: 0;
+	line-height: 1.6;
+}
+
+.post {
+	left: 31%;
+	top: 43%;
+}
+
+.sheriff {
+	left: 68%;
+	top: 43%;
+}
+
+.saloon {
+	left: 68%;
+	top: 72%;
+}
+
+
+/*
+Galerie Lisa
+*/
+
+.galerieseite .seitentafel > p:last-child {
+	margin: 1rem 0 0 0;
+	color: var(--beige);
+	letter-spacing: normal;
+	font-weight: 400;
+}
+
+
+/* Galerie-Slider */
+
+.galerie-slider {
+	width: min(100%, 1000px);
+	margin: 1.5rem auto 3rem;
+}
+
+
+/* Großes Bild mit Pfeilen */
+
+.galerie-anzeige {
+	display: grid;
+	grid-template-columns: 60px minmax(0, 1fr) 60px;
+	align-items: center;
+	gap: 1rem;
+}
+
+.galerie-hauptbild {
+	margin: 0;
+}
+
+.galerie-hauptbild img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	border: 3px solid var(--dunkel);
+}
+
+
+/* Pfeile */
+
+.galerie-zurueck,
+.galerie-weiter {
+	padding: 0;
+	border: none;
+	background: none;
+	color: var(--dunkel);
+	font-size: 2.5rem;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.galerie-zurueck:hover,
+.galerie-zurueck:focus,
+.galerie-weiter:hover,
+.galerie-weiter:focus {
+	transform: scale(1.15);
+}
+
+
+/* Vorschaubilder */
+
+.galerie-vorschau {
+	display: flex;
+	gap: 0.7rem;
+	width: calc(100% - 152px);
+	margin: 1rem auto 0;
+	padding-bottom: 0.5rem;
+	overflow-x: auto;
+	scrollbar-width: none;
+}
+
+.galerie-vorschau::-webkit-scrollbar {
+	display: none;
+}
+
+.galerie-vorschau button {
+	flex: 0 0 140px;
+	padding: 0;
+	border: 2px solid var(--dunkel);
+	background: none;
+	cursor: pointer;
+}
+
+.galerie-vorschau button.aktiv {
+	border: 4px solid var(--beige);
+}
+
+.galerie-vorschau img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
+
+/*
+Merchandise Cosmin
+*/
+
+.merchseite > main {
+	padding-bottom: clamp(3rem, 7vw, 6rem);
+	background-color: var(--tuerkis);
+}
+
+.merch-intro,
+.merch-highlight,
+.merch-kollektion,
+.merch-hinweis {
+	width: min(100%, 1180px);
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.merch-intro {
+	position: relative;
+	margin-bottom: clamp(2rem, 5vw, 4rem);
+	padding: clamp(1.5rem, 4vw, 3.5rem);
+	border: 4px solid var(--beige);
+	outline: 4px solid var(--weinrot);
+	outline-offset: -12px;
+	background-color: var(--dunkel);
+	color: var(--beige);
+}
+
+.merch-kapitelmarke {
+	margin: 0 0 0.55rem;
+	color: var(--tuerkis);
+	font-size: 0.88rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.merch-intro h1 {
+	margin: 0 0 0.75rem;
+	font-size: clamp(2.5rem, 7vw, 5rem);
+	line-height: 0.95;
+}
+
+.merch-einleitung {
+	max-width: 790px;
+	margin: 0;
+	font-size: clamp(1.05rem, 2vw, 1.3rem);
+	line-height: 1.65;
+}
+
+.merch-highlight {
+	display: grid;
+	grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+	grid-template-areas: "highlightbild highlighttext";
+	align-items: center;
+	margin-bottom: clamp(2.5rem, 6vw, 5rem);
+	border: 5px solid var(--dunkel);
+	background-color: var(--beige);
+	box-shadow: 12px 12px 0 rgba(37, 53, 55, 0.34);
+}
+
+.merch-highlight-bild {
+	position: relative;
+	grid-area: highlightbild;
+	display: grid;
+	place-items: center;
+	min-height: 680px;
+	margin: 0;
+	padding: clamp(1rem, 3vw, 2.5rem);
+	overflow: hidden;
+	border-right: 5px solid var(--dunkel);
+	background: radial-gradient(circle at 50% 42%, rgba(242, 224, 177, 0.98) 0 32%, rgba(41, 171, 181, 0.88) 65%, var(--dunkel) 100%);
+}
+
+.merch-highlight-bild::before {
+	content: "";
+	position: absolute;
+	inset: 1.1rem;
+	border: 3px solid rgba(124, 54, 57, 0.8);
+	pointer-events: none;
+}
+
+.merch-highlight-bild img {
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: min(100%, 500px);
+	height: 630px;
+	object-fit: contain;
+	filter: drop-shadow(0 18px 15px rgba(37, 53, 55, 0.42));
+}
+
+.merch-highlight-bild figcaption {
+	position: absolute;
+	z-index: 2;
+	right: 1.5rem;
+	bottom: 1.5rem;
+	left: 1.5rem;
+	padding: 0.75rem 1rem;
+	background-color: var(--weinrot);
+	color: var(--beige);
+	font-family: "Marcellus SC", Georgia, serif;
+	font-weight: 600;
+	text-align: center;
+}
+
+.merch-highlight-text {
+	grid-area: highlighttext;
+	padding: clamp(2rem, 5vw, 4.5rem);
+}
+
+.merch-highlight-text h2 {
+	margin: 0 0 1.2rem;
+	color: var(--weinrot);
+	font-size: clamp(2.2rem, 5vw, 4rem);
+	line-height: 1;
+}
+
+.merch-highlight-text > p:not(.produkt-status):not(.produktverfuegbarkeit) {
+	margin: 0 0 1rem;
+	font-size: 1.08rem;
+	line-height: 1.75;
+}
+
+.produktdaten--highlight {
+	margin-top: 2rem;
+}
+
+.merch-kollektion {
+	display: grid;
+	gap: clamp(2rem, 6vw, 5rem);
+}
+
+.produktkarte {
+	display: grid;
+	grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+	grid-template-areas: "produktbild produkttext";
+	border: 4px solid var(--dunkel);
+	background-color: var(--beige);
+	box-shadow: 10px 10px 0 rgba(37, 53, 55, 0.28);
+}
+
+.produktkarte--becher {
+	grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+	grid-template-areas: "produkttext produktbild";
+}
+
+.produktbild {
+	position: relative;
+	grid-area: produktbild;
+	display: grid;
+	place-items: center;
+	min-height: 620px;
+	margin: 0;
+	padding: clamp(1.5rem, 4vw, 3.5rem);
+	border-right: 4px solid var(--dunkel);
+	background-color: var(--beige);
+	overflow: hidden;
+}
+
+.produktkarte--becher .produktbild {
+	border-right: 0;
+	border-left: 4px solid var(--dunkel);
+}
+
+.produktbild::before {
+	content: "";
+	position: absolute;
+	width: 72%;
+	aspect-ratio: 1;
+	border: 6px solid var(--tuerkis);
+	transform: rotate(45deg);
+	opacity: 0.42;
+}
+
+.produktbild::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 18%;
+	background-color: var(--weinrot);
+	opacity: 0.88;
+}
+
+.produktbild img {
+	position: relative;
+	z-index: 2;
+	display: block;
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	max-height: 560px;
+	object-fit: contain;
+	filter: drop-shadow(10px 12px 0 rgba(37, 53, 55, 0.2));
+}
+
+.produktkarte--becher .produktbild img {
+	width: 100%;
+}
+
+.produktbild figcaption {
+	position: absolute;
+	z-index: 3;
+	right: 1rem;
+	bottom: 1rem;
+	padding: 0.45rem 0.75rem;
+	border: 2px solid var(--beige);
+	background-color: var(--dunkel);
+	color: var(--beige);
+	font-family: "Marcellus SC", Georgia, serif;
+	font-size: 0.9rem;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+.produkttext {
+	grid-area: produkttext;
+	align-self: center;
+	padding: clamp(1.6rem, 4.5vw, 4rem);
+}
+
+.produkt-status {
+	display: inline-block;
+	margin: 0 0 0.8rem;
+	padding: 0.35rem 0.65rem;
+	border-left: 5px solid var(--weinrot);
+	background-color: var(--dunkel);
+	color: var(--beige);
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+}
+
+.produkttext h2 {
+	margin: 0 0 1.1rem;
+	color: var(--weinrot);
+	font-size: clamp(2rem, 5vw, 3.35rem);
+	line-height: 1;
+}
+
+.produkttext > p:not(.produkt-status):not(.produktverfuegbarkeit) {
+	margin: 0 0 1rem;
+	font-size: 1.05rem;
+	line-height: 1.7;
+}
+
+.produktdaten {
+	display: grid;
+	grid-template-columns: minmax(7.5rem, max-content) minmax(0, 1fr);
+	margin: 1.7rem 0;
+	border-top: 3px solid var(--dunkel);
+	border-bottom: 3px solid var(--dunkel);
+}
+
+.produktdaten dt,
+.produktdaten dd {
+	margin: 0;
+	padding: 0.7rem 0;
+	border-bottom: 1px solid rgba(37, 53, 55, 0.25);
+}
+
+.produktdaten dt:nth-last-of-type(1),
+.produktdaten dd:last-child {
+	border-bottom: 0;
+}
+
+.produktdaten dt {
+	padding-right: 1rem;
+	color: var(--weinrot);
+	font-family: "Marcellus SC", Georgia, serif;
+	font-weight: 600;
+}
+
+.produktverfuegbarkeit {
+	margin: 0;
+	padding: 1rem 1.15rem;
+	border-left: 6px solid var(--tuerkis);
+	background-color: var(--dunkel);
+	color: var(--beige);
+	font-weight: 600;
+	line-height: 1.5;
+}
+
+.merch-hinweis {
+	margin-top: clamp(2.5rem, 6vw, 4.5rem);
+	padding: clamp(1.4rem, 3vw, 2.2rem);
+	border: 4px solid var(--dunkel);
+	background-color: var(--beige);
+	box-shadow: 8px 8px 0 rgba(37, 53, 55, 0.28);
+}
+
+.merch-hinweis h2 {
+	margin: 0 0 0.7rem;
+	color: var(--weinrot);
+	font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.merch-hinweis p {
+	margin: 0;
+	line-height: 1.65;
+}
+
+.produktbild img.keksdose {
+	width: 230%;
+	max-width: none;
+	transform: translateY(-2rem);
+}
+
+
+/*
+Impressum Cosmin
+*/
+
+.impressumseite > main {
+	background:
+		linear-gradient(rgba(41, 171, 181, 0.94), rgba(41, 171, 181, 0.94)),
+		radial-gradient(circle at top right, var(--beige), transparent 42%);
+}
+
+.impressumseite > main > h1,
+.impressum-einleitung,
+.musterhinweis,
+.impressum-inhalt {
+	width: min(100%, 1000px);
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.impressumseite > main > h1 {
+	margin-bottom: 0.6rem;
+	font-size: clamp(2.2rem, 5vw, 3.5rem);
+}
+
+.impressum-einleitung {
+	margin-top: 0;
+	margin-bottom: 1.5rem;
+	font-size: 1.15rem;
+	line-height: 1.6;
+}
+
+.musterhinweis {
+	margin-bottom: 2rem;
+	padding: 1rem 1.2rem;
+	border-left: 6px solid var(--weinrot);
+	background-color: rgba(242, 224, 177, 0.9);
+	line-height: 1.5;
+}
+
+.impressum-inhalt {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+.impressum-karte {
+	padding: 1.8rem;
+	border: 3px solid var(--dunkel);
+	background-color: var(--beige);
+	box-shadow: 8px 8px 0 rgba(37, 53, 55, 0.24);
+}
+
+.impressum-karte--breit {
+	grid-column: 1 / -1;
+}
+
+.impressum-karte h2 {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	padding-bottom: 0.55rem;
+	border-bottom: 2px solid var(--weinrot);
+	color: var(--weinrot);
+	font-size: 1.45rem;
+}
+
+.impressum-karte p {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	line-height: 1.65;
+}
+
+.impressum-karte p:last-child {
+	margin-bottom: 0;
+}
+
+.impressum-karte address {
+	font-style: normal;
+}
+
+.impressum-karte a {
+	font-weight: 600;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.18em;
+}
+
+.impressum-karte a:hover,
+.impressum-karte a:focus-visible {
+	color: var(--weinrot);
+}
+
+.impressum-karte a:focus-visible {
+	outline: 2px solid var(--weinrot);
+	outline-offset: 3px;
+}
+
+
+/*
+Responsive
+*/
+
+
+/* Tablet */
+
+@media screen and (width < 1000px) {
+
+	body > header {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	body > header > a {
+		justify-self: center;
+	}
+
+	#Navleiste {
+		justify-content: center;
+	}
+
+	body > main {
+		padding: 1.5rem;
+	}
+
+/* Luzz & Co Cosmin */ 
+
+	.charakterkarte,
+	.charakterkarte--lucy {
+		grid-template-columns: minmax(230px, 0.75fr) minmax(0, 1.25fr);
+		grid-template-areas: "bild text";
+	}
+
+	.charakterkarte--lucy .charakterbild {
+		border-right: 4px solid var(--dunkel);
+		border-left: 0;
+	}
+
+	.charakterbild {
+		min-height: 510px;
+		padding-right: 1.25rem;
+		padding-left: 1.25rem;
+	}
+
+	.charakterbild img {
+		height: min(480px, 55vw);
+	}
+
+/* Merchandise Cosmin */ 
+
+	.merch-highlight {
+		grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+	}
+
+	.merch-highlight-bild {
+		min-height: 570px;
+	}
+
+	.merch-highlight-bild img {
+		height: 520px;
+	}
+
+	.produktkarte,
+	.produktkarte--becher {
+		grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+		grid-template-areas: "produktbild produkttext";
+	}
+
+	.produktkarte--becher .produktbild {
+		border-right: 4px solid var(--dunkel);
+		border-left: 0;
+	}
+
+	.produktbild {
+		min-height: 520px;
+		padding-right: 1.25rem;
+		padding-left: 1.25rem;
+	}
+
+	.produktbild img {
+		max-height: 480px;
+	}
+
+/* Impressum Cosmin */
+
+	.impressum-inhalt {
+		grid-template-columns: 1fr;
+	}
+
+	.impressum-karte--breit {
+		grid-column: auto;
+	}
+
+/* Start Lisa */
+	
+	.hero {
+	grid-template-columns: 1fr;
+	min-height: auto;
+	padding: 2rem;
+	}
+
+	.hero h1 {
+	font-size: 2.5rem;
+	}
+
+	.keyvisual {
+	order: -1;
+	}
+}
+
+
+/* Smartphone Lisa */
+
+@media screen and (width < 700px) {
+
+	body > header {
+	grid-template-columns: 1fr;
+	gap: 0.5rem;
+	padding: 1rem;
+}
+
+	body > header > a {
+		grid-column: 1;
+		grid-row: 1;
+		justify-self: center;
+	}
+
+	#Navleiste {
+		grid-column: 1;
+		grid-row: 3;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		overflow: hidden;
+		max-height: 0;
+		gap: 0.5rem;
+		transition: max-height 0.8s ease;
+	}
+
+	body > header > a img {
+		width: 210px;
+		height: auto;
+		transform: translateX(10px);
+	}
+
+	#Menueicon:hover + #Navleiste,
+	#Navleiste:hover {
+		max-height: 30rem;
+	}
+
+	#Menueicon {
+		display: block;
+		color: var(--beige);
+		font-size: 2rem;
+		align-self: center;
+		margin-top: -1.5rem;
+	}
+
+	#Navleiste a {
+		display: block;
+		width: fit-content;
+		min-width: 9rem;
+		margin: 0.25rem auto;
+		padding: 0.5rem 0.8rem;
+		text-align: center;
+	}
+
+	body > main {
+		padding: 1rem;
+	}
+	
+	.zurueck {
+		padding: 0.5rem 0.5rem;
+	}
+
+/* Luzz & Co Cosmin */
+
+	.charakter-intro {
+		box-shadow: 6px 6px 0 rgba(37, 53, 55, 0.28);
+	}
+
+	.charakterkarte,
+	.charakterkarte--lucy {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"bild"
+			"text";
+		box-shadow: 6px 6px 0 rgba(37, 53, 55, 0.28);
+	}
+
+	.charakterkarte--luzz .charakterbild,
+	.charakterkarte--lucy .charakterbild {
+		min-height: 430px;
+		border-right: 0;
+		border-bottom: 4px solid var(--dunkel);
+		border-left: 0;
+	}
+
+	.charakterbild img {
+		height: 410px;
+	}
+
+	.charakterdaten {
+		grid-template-columns: 1fr;
+	}
+
+	.charakterdaten dt {
+		padding-bottom: 0.15rem;
+		border-bottom: 0;
+	}
+
+	.charakterdaten dd {
+		padding-top: 0.15rem;
+	}
+
+	.charakterdaten dt:nth-last-of-type(1) {
+		border-bottom: 0;
+	}
+
+	.geheimnis {
+		outline-offset: -9px;
+	}
+
+
+/* Das Spiel Lisa */
+
+	.seitentafel {
+		width: 100%;
+		margin: 2rem 0 3rem 0;
+		padding: 1.5rem 2rem;
+	}
+
+	.spielvorstellung {
+		width: 100%;
+	}
+
+	.spielvorstellung img {
+	width: 135%;
+	max-width: none;
+	margin-left: -17.5%;
+	}
+
+	.spielinfos {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		margin: 2rem auto 3rem auto;
+	}
+
+	.spielidee {
+		min-height: auto;
+		padding-top: 2rem;
+		padding-bottom: 8rem;
+		background-size: 55% auto;
+		background-position: center bottom;
+	}
+
+	.redstone-entdecken {
+		width: 100%;
+		padding: 1rem;
+		margin: 0 auto 3rem auto;
+	}
+
+/* Galerie Lisa */	
+	
+	.galerie-vorschau {
+		width: 100%;
+		gap: 0.4rem;
+	}
+
+	.galerie-vorschau button {
+		flex-basis: 90px;
+	}
+	
+	.galerie-anzeige {
+		grid-template-columns: 35px minmax(0, 1fr) 35px;
+		gap: 0.4rem;
+	}
+	
+
+/* Merchandise Cosmin */
+
+	.merch-highlight {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"highlightbild"
+			"highlighttext";
+		box-shadow: 6px 6px 0 rgba(37, 53, 55, 0.28);
+	}
+
+	.merch-highlight-bild {
+		min-height: 520px;
+		border-right: 0;
+		border-bottom: 5px solid var(--dunkel);
+	}
+
+	.merch-highlight-bild img {
+		height: 480px;
+	}
+
+	.merch-intro {
+		outline-offset: -9px;
+	}
+
+	.produktkarte,
+	.produktkarte--becher {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"produktbild"
+			"produkttext";
+		box-shadow: 6px 6px 0 rgba(37, 53, 55, 0.28);
+	}
+
+	.produktbild,
+	.produktkarte--becher .produktbild {
+		min-height: 420px;
+		padding: 1.5rem;
+		border-right: 0;
+		border-bottom: 4px solid var(--dunkel);
+		border-left: 0;
+	}
+
+	.produktbild img,
+	.produktkarte--becher .produktbild img {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 390px;
+	}
+
+	.produktdaten {
+		grid-template-columns: 1fr;
+	}
+
+	.produktdaten dt {
+		padding-bottom: 0.15rem;
+		border-bottom: 0;
+	}
+
+	.produktdaten dd {
+		padding-top: 0.15rem;
+	}
+
+	.merch-hinweis {
+		box-shadow: 5px 5px 0 rgba(37, 53, 55, 0.28);
+	}
+
+/* Impressum Cosmin */
+
+	.impressum-einleitung {
+		font-size: 1rem;
+	}
+
+	.impressum-karte {
+		padding: 1.25rem;
+		box-shadow: 5px 5px 0 rgba(37, 53, 55, 0.24);
+	}
+
+	body > footer {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.galerie-auswahl {
+		grid-template-columns: 1fr;
+	}
+
+	.hotspot {
+		padding: 0.3rem 0.5rem;
+		font-size: 0.72rem;
+	}
+
+	.funfact {
+		width: 88%;
+		padding: 2.8rem 1.25rem 1.4rem;
+	}
+	
+/* Start Lisa */
+
+	.hero {
+	gap: 1.5rem;
+	padding: 1rem;
+	}
+
+	.hero h1 {
+	font-size: 2rem;
+	}
+
+	.hero p {
+	font-size: 1rem;
+	}
+
+	.playbutton {
+	display: block;
+	width: 100%;
+	text-align: center;
+	}
+
+	.trailer {
+	padding: 2rem 1rem;
+	}
+}
+
+
+/* Kleine Smartphones Cosmin */
+
+@media screen and (width < 500px) {
+
+	body > header > a img {
+		max-width: 150px;
+	}
+
+	body > main {
+		padding: 0.8rem;
+	}
+
+	.merch-highlight-bild {
+		min-height: 430px;
+	}
+
+	.merch-highlight-bild img {
+		height: 395px;
+	}
+}
+
+/* Reduzierte Bewegung Cosmin */
+
+@media (prefers-reduced-motion: reduce) {
+
+	.hero::after {
+		animation: none;
+	}
+
+	.scroll-story {
+		height: 100vh;
+		height: 100svh;
+		min-height: 100vh;
+	}
+
+	.story-frame,
+	.scroll-hint::after,
+	.landing-logo {
+		animation: none;
+		transition: none;
+	}
+
+	.story-frame {
+		display: none;
+		transform: none !important;
+	}
+
+	.story-frame:last-child {
+		display: block;
+		opacity: 1 !important;
+	}
+
+	.scroll-stage::before,
+	.scroll-hint,
+	.intro-progress {
+		display: none;
+	}
+
+	.landing-logo {
+		opacity: 1 !important;
+		transform: translate(-50%, -46%) scale(1) !important;
+		pointer-events: auto;
+	}
+
+}
